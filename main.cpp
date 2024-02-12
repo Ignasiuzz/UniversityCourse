@@ -13,28 +13,7 @@ struct duomenys { //duomenu struktura
     double med; //vidurkis naudojant mediana
 };
 
-int main() {
-    duomenys a[100];
-    int n, m;
-
-    cout << "Iveskite mokiniu skaiciu: ";
-    cin >> n;
-    while (cin.fail()) { // tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "!ERROR! Iveskite skaiciu: ";
-        cin >> n;
-    }
-
-    cout << "Iveskite namu darbu skaiciu: ";
-    cin >> m;
-    while (cin.fail()) { // tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "!ERROR! Iveskite skaiciu: ";
-        cin >> m;
-    }
-
+void ivedimas ( int n, int m, duomenys a[]) {
     for (int i = 0; i < n; i++) { // informacijos ivedimas
         cout << "Iveskite mokinio varda: ";
         cin >> a[i].vardas;
@@ -57,15 +36,19 @@ int main() {
             cin >> a[i].egz;
         }
     }
+}
 
-    for (int i = 0; i < n; i++) { //vidurkis
+void vidurkis ( int n, int m, duomenys a[]) {
+    for (int i = 0; i < n; i++) {
         double sum=0.0;
         for (int j = 0; j < m; j++) {
-        sum += a[i].nd[j];
+            sum += a[i].nd[j];
         }
         a[i].vid = 0.4*(sum/m) + 0.6*a[i].egz;
     }
+}
 
+void mediana ( int n, int m, duomenys a[]) {
     for (int i = 0; i < n; i++) { //vidurkis naudojant mediana
         int x = m/2;
         a[i].med==0.0;
@@ -82,9 +65,36 @@ int main() {
         a[i].med = 0.4*((a[i].nd[x]+a[i].nd[x-1])/2) + 0.6*a[i].egz;
         else
         a[i].med = 0.4*a[i].nd[x] + 0.6*a[i].egz;
-    }   
+    }  
+}
 
-    cout<<"Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)"<<endl; //isvedimas
+int main() {
+    duomenys a[100];
+    int n, m;
+
+    cout << "Iveskite mokiniu skaiciu: ";
+    cin >> n;
+    while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite skaiciu: ";
+        cin >> n;
+    }
+    cout << "Iveskite namu darbu skaiciu: ";
+    cin >> m;
+    while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite skaiciu: ";
+        cin >> m;
+    }
+
+ivedimas (n, m, a);
+vidurkis (n, m, a);
+mediana (n, m, a);
+
+     /* Isvedimas */
+    cout<<"Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)"<<endl;
     cout<<"-----------------------------------------------------------------"<<endl;
     for(int i = 0; i < n; i++){
         cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(19)<<setprecision(2)<<fixed<<a[i].vid<<setprecision(2)<<fixed<<a[i].med<<endl;
