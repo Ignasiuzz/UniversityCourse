@@ -9,7 +9,8 @@ struct duomenys { //duomenu struktura
     string pavarde;
     int nd[100];
     int egz;
-    double vid;
+    double vid; //vidurkis
+    double med; //vidurkis naudojant mediana
 };
 
 int main() {
@@ -43,7 +44,7 @@ int main() {
             cout << "Iveskite mokinio namu darbu rezultata: ";
             cin >> a[i].nd[j];
 
-            while(a[i].nd[j] < 0 || a[i].nd[j] > 10){ //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
+            while (a[i].nd[j] < 0 || a[i].nd[j] > 10) { //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
                 cout << "!ERROR! Iveskite namu darbu rezultata 10-baleje sistemoje: ";
                 cin >> a[i].nd[j];
             }
@@ -51,25 +52,42 @@ int main() {
         cout << "Iveskite mokinio egzamino rezultata: ";
         cin >> a[i].egz;
 
-        while(a[i].egz < 0 || a[i].egz > 10){ //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
+        while (a[i].egz < 0 || a[i].egz > 10) { //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
             cout << "!ERROR! Iveskite egzamino rezultata 10-baleje sistemoje: ";
             cin >> a[i].egz;
         }
     }
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { //vidurkis
         double sum=0.0;
-        for(int j = 0; j < m; j++) {
+        for (int j = 0; j < m; j++) {
         sum += a[i].nd[j];
         }
-        cout<<sum<<endl;
         a[i].vid = 0.4*(sum/m) + 0.6*a[i].egz;
     }
 
-    cout<<"Pavarde        Vardas         Galutinis (Vid.)"<<endl;
-    cout<<"----------------------------------------------"<<endl;
+    for (int i = 0; i < n; i++) { //vidurkis naudojant mediana
+        int x = m/2;
+        a[i].med==0.0;
+        for (int j = 0; j < m - 1; j++) {
+            for (int k = 0; k < m - j - 1; k++) {
+                if (a[i].nd[k] > a[i].nd[k + 1]) {
+                    int temp = a[i].nd[k];
+                    a[i].nd[k] = a[i].nd[k + 1];
+                    a[i].nd[k + 1] = temp;
+                }
+            }
+        }
+        if (m % 2 == 0)
+        a[i].med = 0.4*((a[i].nd[x]+a[i].nd[x-1])/2) + 0.6*a[i].egz;
+        else
+        a[i].med = 0.4*a[i].nd[x] + 0.6*a[i].egz;
+    }   
+
+    cout<<"Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)"<<endl; //isvedimas
+    cout<<"-----------------------------------------------------------------"<<endl;
     for(int i = 0; i < n; i++){
-        cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(15)<<setprecision(3)<<a[i].vid<<endl;
+        cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(19)<<setprecision(2)<<fixed<<a[i].vid<<setprecision(2)<<fixed<<a[i].med<<endl;
     }
 
     return 0;
