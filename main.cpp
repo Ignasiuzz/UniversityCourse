@@ -68,6 +68,15 @@ void mediana ( int n, int m, duomenys a[]) {
     }  
 }
 
+void isvedimas ( int n, duomenys a[]) {
+    cout<<"-----------------------------------------------------------------"<<endl;
+    cout<<"Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)"<<endl;
+    cout<<"-----------------------------------------------------------------"<<endl;
+    for(int i = 0; i < n; i++){
+        cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(19)<<setprecision(2)<<fixed<<a[i].vid<<setprecision(2)<<fixed<<a[i].med<<endl;
+    }
+}
+
 int main() {
     duomenys a[100];
     int n, m;
@@ -89,16 +98,10 @@ int main() {
         cin >> m;
     }
 
-ivedimas (n, m, a);
-vidurkis (n, m, a);
-mediana (n, m, a);
-
-     /* Isvedimas */
-    cout<<"Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)"<<endl;
-    cout<<"-----------------------------------------------------------------"<<endl;
-    for(int i = 0; i < n; i++){
-        cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(19)<<setprecision(2)<<fixed<<a[i].vid<<setprecision(2)<<fixed<<a[i].med<<endl;
-    }
+    ivedimas (n, m, a);
+    vidurkis (n, m, a);
+    mediana (n, m, a);
+    isvedimas (n, a);
 
     return 0;
 }
