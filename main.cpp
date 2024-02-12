@@ -4,15 +4,16 @@
 #include <limits>
 using namespace std;
 
-struct duom {
+struct duomenys { //duomenu struktura
     string vardas;
     string pavarde;
-    int nd;
+    int nd[100];
     int egz;
+    double vid;
 };
 
 int main() {
-    duom a[500];
+    duomenys a[100];
     int n, m;
 
     cout << "Iveskite mokiniu skaiciu: ";
@@ -20,7 +21,7 @@ int main() {
     while (cin.fail()) { // tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Iveskite tinkama skaiciu!!!: ";
+        cout << "!ERROR! Iveskite skaiciu: ";
         cin >> n;
     }
 
@@ -29,7 +30,7 @@ int main() {
     while (cin.fail()) { // tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Iveskite tinkama skaiciu!!!: ";
+        cout << "!ERROR! Iveskite skaiciu: ";
         cin >> m;
     }
 
@@ -40,10 +41,35 @@ int main() {
         cin >> a[i].pavarde;
         for (int j = 0; j < m; j++) {
             cout << "Iveskite mokinio namu darbu rezultata: ";
-            cin >> a[i].nd;
+            cin >> a[i].nd[j];
+
+            while(a[i].nd[j] < 0 || a[i].nd[j] > 10){ //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
+                cout << "!ERROR! Iveskite namu darbu rezultata 10-baleje sistemoje: ";
+                cin >> a[i].nd[j];
+            }
         }
         cout << "Iveskite mokinio egzamino rezultata: ";
         cin >> a[i].egz;
+
+        while(a[i].egz < 0 || a[i].egz > 10){ //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
+            cout << "!ERROR! Iveskite egzamino rezultata 10-baleje sistemoje: ";
+            cin >> a[i].egz;
+        }
+    }
+
+    for(int i = 0; i < n; i++) {
+        double sum=0.0;
+        for(int j = 0; j < m; j++) {
+        sum += a[i].nd[j];
+        }
+        cout<<sum<<endl;
+        a[i].vid = 0.4*(sum/m) + 0.6*a[i].egz;
+    }
+
+    cout<<"Pavarde        Vardas         Galutinis (Vid.)"<<endl;
+    cout<<"----------------------------------------------"<<endl;
+    for(int i = 0; i < n; i++){
+        cout<<left<<setw(15)<<a[i].pavarde<<setw(15)<<a[i].vardas<<setw(15)<<setprecision(3)<<a[i].vid<<endl;
     }
 
     return 0;
