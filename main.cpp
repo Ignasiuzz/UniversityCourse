@@ -34,7 +34,7 @@ void ivestis1 ( int& n, duomenys a[]) {
     }
 
     for (int i = 0; i < n; i++) {
-        a[i].ndkiekis = n;
+        a[i].ndkiekis = m;
     }
 
     for (int i = 0; i < n; i++) { // informacijos ivedimas
@@ -80,6 +80,13 @@ void ivestis2 ( int& n, duomenys a[]) {
                     cout << "Ar norite ivesti pazymi (y/n) ";
                     cin >> loop2;
 
+                    while (cin.fail() || (loop2 != 'y' && loop2 != 'n')) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "!ERROR! Iveskite 'y' arba 'n': ";
+                    cin >> loop2;
+                    }
+                    
                     if (loop2 == 'y') {
                         cout << "Iveskite mokinio namu darbu rezultata: ";
                         cin >> a[n].nd[j];
@@ -122,7 +129,7 @@ void vidurkis ( int n, duomenys a[]) {
 void mediana ( int n, duomenys a[]) {
     for (int i = 0; i < n; i++) { //vidurkis naudojant mediana
         int x = a[i].ndkiekis/2;
-        a[i].med==0.0;
+        a[i].med = 0.0;
         for (int j = 0; j < a[i].ndkiekis - 1; j++) {
             for (int k = 0; k < a[i].ndkiekis - j - 1; k++) {
                 if (a[i].nd[k] > a[i].nd[k + 1]) {
@@ -132,8 +139,13 @@ void mediana ( int n, duomenys a[]) {
                 }
             }
         }
-        if (a[i].ndkiekis % 2 == 0)
-        a[i].med = 0.4*((a[i].nd[x]+a[i].nd[x-1])/2) + 0.6*a[i].egz;
+
+        if (a[i].ndkiekis % 2 == 0){
+        double b, c;
+        b=a[i].nd[x-1];
+        c=a[i].nd[x];
+        a[i].med = 0.4*((b+c)/2) + 0.6*a[i].egz;
+        }
         else
         a[i].med = 0.4*a[i].nd[x] + 0.6*a[i].egz;
     }  
