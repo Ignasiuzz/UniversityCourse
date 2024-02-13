@@ -46,6 +46,13 @@ void ivestis1 ( int& n, duomenys a[]) {
             cout << "Iveskite mokinio namu darbu rezultata: ";
             cin >> a[i].nd[j];
 
+            while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "!ERROR! Iveskite skaiciu: ";
+            cin >> a[i].nd[j];
+            }
+
             while (a[i].nd[j] < 0 || a[i].nd[j] > 10) { //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
                 cout << "!ERROR! Iveskite namu darbu rezultata 10-baleje sistemoje: ";
                 cin >> a[i].nd[j];
@@ -53,6 +60,13 @@ void ivestis1 ( int& n, duomenys a[]) {
         }
         cout << "Iveskite mokinio egzamino rezultata: ";
         cin >> a[i].egz;
+
+        while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite skaiciu: ";
+        cin >> a[i].egz;
+        }
 
         while (a[i].egz < 0 || a[i].egz > 10) { //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
             cout << "!ERROR! Iveskite egzamino rezultata 10-baleje sistemoje: ";
@@ -91,6 +105,13 @@ void ivestis2 ( int& n, duomenys a[]) {
                         cout << "Iveskite mokinio namu darbu rezultata: ";
                         cin >> a[n].nd[j];
 
+                        while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cout << "!ERROR! Iveskite skaiciu: ";
+                        cin >> a[n].nd[j];
+                        }
+
                         while (a[n].nd[j] < 0 || a[n].nd[j] > 10) { //tikrinama ar buvo ivestas skaicius 10-baleje sistemoje
                             cout << "!ERROR! Iveskite namu darbu rezultata 10-baleje sistemoje: ";
                             cin >> a[n].nd[j];
@@ -104,6 +125,13 @@ void ivestis2 ( int& n, duomenys a[]) {
 
                 cout << "Iveskite mokinio egzamino rezultata: ";
                 cin >> a[n].egz;
+
+                while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "!ERROR! Iveskite skaiciu: ";
+                cin >> a[n].egz;
+                }
 
                 while (a[n].egz < 0 || a[n].egz > 10) { /* Tikrinama ar buvo ivestas skaicius 10-baleje sistemoje */
                     cout << "!ERROR! Iveskite egzamino rezultata 10-baleje sistemoje: ";
@@ -169,6 +197,13 @@ int main() {
     cout << "Ar zinomas mokiniu ir namu darbu skaicius (y/n) ";
     cin >> mode;
 
+    while (cin.fail() || (mode != 'y' && mode != 'n')) {    /* Tikrinama ar buvo ivesta y arba n */
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "!ERROR! Iveskite 'y' arba 'n': ";
+    cin >> mode;
+    }
+
     if (mode == 'y' || mode == 'n') {
         if (mode == 'y') {
             ivestis1(n, a); /* Jeigu ZINOMAS mokiniu ir namu darbu skaicius */
@@ -182,7 +217,7 @@ int main() {
         isvedimas(n, a);
     } 
     else {
-        cout << "!ERROR! Bloga ivestis, bandykite dar karta" << endl;
+        cout << "!ERROR! Kazkas neveikia, paleiskite programa is naujo" << endl;
         return 0;
     }
 
