@@ -27,8 +27,6 @@ void input(Studentas& duom) {
         cin >> grade;
         duom.namudarbas.push_back(grade);
     }
-    sort(duom.namudarbas.begin(), duom.namudarbas.end());
-
     cout << "Iveskite studento egzamino rezultata: ";
     cin >> duom.egzaminorez;
 }
@@ -64,27 +62,60 @@ double GalutinisMed(const Studentas& duom) {
 }
 
 void output(const vector<Studentas>& student) {
-    cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis (Vid.)" << endl;
-    cout << "-------------------------------------------------------" << endl;
+    cout << "-----------------------------------------------------------------" << endl;
+    cout << "Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)" << endl;
+    cout << "-----------------------------------------------------------------" << endl;
     for (const auto& duom : student) {
-        cout << duom.Pavarde << setw(15) << duom.Vardas << setw(15) << fixed << setprecision(2) << GalutinisVid(duom) << setw(6) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+        cout << left<<setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
     }
+    cout << "-----------------------------------------------------------------" << endl;
 }
 
 int main() {
     vector<Studentas> student;
 
-    char choice;
-    do {
-        Studentas duom;
-        input(duom);
-        student.push_back(duom);
+    // Tikrinama ar is anksto zinomas studentu skaicius
+    char mode;
+    cout << "Ar zinomas studentu skaicius (y/n): ";
+    cin >> mode;
 
-        cout << "Ar norite ivesti kita studenta? (y/n): ";
-        cin >> choice;
-    } while (choice == 'y' || choice == 'Y');
+    if (mode == 'y' || mode == 'n') {
+        // Jeigu ZINOMAS studentu ir namu darbu skaicius
+        if (mode == 'y') {
+            int m;
+            cout << "Iveskite studentu skaiciu: "; 
+            cin >> m;
 
-    output(student);
+            vector<Studentas> student(m);
 
+            for (int i = 0; i < m; i++) {
+                input(student[i]);
+            }
+
+            output(student);
+            return 0;
+        }
+        // Jeigu NEZINOMAS studentu ir namu darbu skaicius
+        else {
+            char choice;
+
+            do {
+            Studentas duom;
+            input(duom);
+            student.push_back(duom);
+
+            cout << "Ar norite ivesti kita studenta? (y/n): ";
+            cin >> choice;
+            } 
+            while (choice == 'y');
+
+            output(student);
+            return 0;
+        }
+    } 
+    else {
+        cout << "!ERROR! Kazkas neveikia, paleiskite programa is naujo" << endl;
+        return 0;
+    }
     return 0;
 }
