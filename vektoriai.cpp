@@ -13,31 +13,109 @@ struct Studentas {
     int egzaminorez;
 };
 
-void input(Studentas& duom) {
-    cout << "Iveskite studento varda: ";
-    cin >> duom.Vardas;
-    cout << "Iveskite studento pavarde: ";
-    cin >> duom.Pavarde;
+bool isString(const string& str_placeholder){
+    for (char c : str_placeholder) {
+        if (!isalpha(c)) {
+            return false;
+        }
+    }
+    return true;
+}
 
-    // Use a do-while loop to allow the user to enter more grades or finish
+bool isInt(const string& str_placeholder){
+    for (char c : str_placeholder){
+        if (!isdigit(c)){
+            return false;
+        }
+
+        int grade = stoi(str_placeholder);
+
+        if (grade > 10 || grade < 0){
+            return false;
+        }
+    }
+    return true;
+}
+
+void input(Studentas& duom) {
+    string str_placeholder;
+    int int_placeholder;
     char choice;
+    int n;
+
+    // Vardo input verification
     do {
-        cout << "Iveskite studento namu darbu kieki (n): ";
-        int n;
-        cin >> n;
+        cout << "Iveskite studento varda: ";
+        cin >> str_placeholder;
+                
+        if (!isString(str_placeholder)){
+            cout << "!ERROR! Studentu varduose negali buti skaiciu !" << endl;
+        }
+    } while (!isString(str_placeholder));
+    duom.Vardas = str_placeholder;
+
+    // Pavardes input verification
+    do {
+        cout << "Iveskite studento pavarde: ";
+        cin >> str_placeholder;
+                
+        if (!isString(str_placeholder)){
+            cout << "!ERROR! Studentu pavardese negali buti skaiciu !" << endl;
+        }
+    } while (!isString(str_placeholder));
+    duom.Pavarde = str_placeholder;
+
+    // Pazymiu loop
+    do {
+        // Namu darbu kiekio input verification
+        do {
+            cout << "Iveskite studento namu darbu kieki (n): ";
+            cin >> str_placeholder;
+                    
+            if (!isInt(str_placeholder)){
+                cout << "!ERROR! Prasome ivesti skaiciu nuo 1 iki 10 !" << endl;
+            }
+        } while (!isInt(str_placeholder));
+        int_placeholder = stoi(str_placeholder);
+        n = int_placeholder;
+
+        // Namu darbu rezultato input verification
         for (int i = 0; i < n; i++) {
-            cout << "Iveskite " << i + 1 << " namu darbo rezultata: ";
-            int grade;
-            cin >> grade;
-            duom.namudarbas.push_back(grade);
+            do {
+                cout << "Iveskite " << i + 1 << " namu darbo rezultata: ";
+                cin >> str_placeholder;
+                        
+                if (!isInt(str_placeholder)){
+                    cout << "!ERROR! Prasome ivesti skaiciu nuo 1 iki 10 !" << endl;
+                }
+            } while (!isInt(str_placeholder));
+            int_placeholder = stoi(str_placeholder);
+            duom.namudarbas.push_back(int_placeholder);
         }
 
         cout << "Ar norite ivesti dar pazymiu? (y/n): ";
         cin >> choice;
+        // Tikrinama ar buvo ivesta y arba n
+        while (cin.fail() || (choice != 'y' && choice != 'n')) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite 'y' arba 'n': ";
+        cin >> choice;
+        }
+        
     } while (choice == 'y' || choice == 'Y');
 
-    cout << "Iveskite studento egzamino rezultata: ";
-    cin >> duom.egzaminorez;
+
+    do {
+        cout << "Iveskite studento egzamino rezultata: ";
+        cin >> str_placeholder;
+                    
+        if (!isInt(str_placeholder)){
+            cout << "!ERROR! Prasome ivesti skaiciu nuo 1 iki 10 !" << endl;
+        }
+    } while (!isInt(str_placeholder));
+    int_placeholder = stoi(str_placeholder);
+    duom.egzaminorez = int_placeholder;
 }
 
 double Vidurkis(const vector<int>& namudarbas) {
@@ -70,7 +148,7 @@ double GalutinisMed(const Studentas& duom) {
     return 0.4 * ndAverage + 0.6 * duom.egzaminorez;
 }
 
-void output(const vector<Studentas>& student) {
+void Output(const vector<Studentas>& student) {
     cout << "-----------------------------------------------------------------" << endl;
     cout << "Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)" << endl;
     cout << "-----------------------------------------------------------------" << endl;
@@ -87,6 +165,13 @@ int main() {
     char mode;
     cout << "Ar zinomas studentu skaicius (y/n): ";
     cin >> mode;
+    // Tikrinama ar buvo ivesta y arba n
+    while (cin.fail() || (mode != 'y' && mode != 'n')) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "!ERROR! Iveskite 'y' arba 'n': ";
+    cin >> mode;
+    }
 
     if (mode == 'y' || mode == 'n') {
         // Jeigu ZINOMAS studentu ir namu darbu skaicius
@@ -101,7 +186,7 @@ int main() {
                 input(student[i]);
             }
 
-            output(student);
+            Output(student);
             return 0;
         }
         // Jeigu NEZINOMAS studentu ir namu darbu skaicius
@@ -115,10 +200,18 @@ int main() {
 
             cout << "Ar norite ivesti kita studenta? (y/n): ";
             cin >> choice;
+
+            // Tikrinama ar buvo ivesta y arba n
+            while (cin.fail() || (choice != 'y' && choice != 'n')) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "!ERROR! Iveskite 'y' arba 'n': ";
+            cin >> choice;
+    }
             } 
             while (choice == 'y');
 
-            output(student);
+            Output(student);
             return 0;
         }
     } 
