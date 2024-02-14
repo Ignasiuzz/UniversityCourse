@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 struct duomenys { //duomenu struktura
@@ -144,6 +146,45 @@ void ivestis2 ( int& n, duomenys a[]) {
     while (loop == 'y');
 }
 
+void ivestis3 ( int& n, duomenys a[]) {
+    srand(static_cast<unsigned int>(time(0)));
+    
+    cout << "Iveskite mokiniu skaiciu: ";
+    cin >> n;
+    while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite skaiciu: ";
+        cin >> n;
+    }
+    int m;
+    cout << "Iveskite namu darbu skaiciu: ";
+    cin >> m;
+    while (cin.fail()) { /* tikrinama ar buvo ivestas skaicius, jei ne, prasoma ivesti vel */
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite skaiciu: ";
+        cin >> m;
+    }
+
+    for (int i = 0; i < n; i++) {
+        a[i].ndkiekis = m;
+    }
+
+    for (int i = 0; i < n; i++) { // informacijos ivedimas
+        cout << "Iveskite mokinio varda: ";
+        cin >> a[i].vardas;
+        cout << "Iveskite mokinio pavarde: ";
+        cin >> a[i].pavarde;
+        for (int j = 0; j < m; j++) {
+            a[i].nd[j] = rand() % 10 + 1;
+            cout << "Sugeneruotas " << i + 1 << " namu darbo rezultatas: " << a[i].nd[j] << endl;
+        }
+        a[i].egz = rand() % 10 + 1;
+        cout << "Sugeneruotas " << i + 1 << " egzamino rezultatas: " << a[i].egz << endl;
+    }
+}
+
 void vidurkis ( int n, duomenys a[]) {
     for (int i = 0; i < n; i++) {
         double sum=0.0;
@@ -194,22 +235,25 @@ int main() {
     int m; //namu darbu skaicius
 
     char mode;
-    cout << "Ar zinomas mokiniu ir namu darbu skaicius (y/n) ";
+    cout << "Ar zinomas mokiniu ir namu darbu skaicius (y/n). Jeigu norite generuoti pazymius spauskite 'g': ";
     cin >> mode;
 
-    while (cin.fail() || (mode != 'y' && mode != 'n')) {    /* Tikrinama ar buvo ivesta y arba n */
+    while (cin.fail() || (mode != 'y' && mode != 'n' && mode != 'g')) {    /* Tikrinama ar buvo ivesta y arba n */
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "!ERROR! Iveskite 'y' arba 'n': ";
+    cout << "!ERROR! Iveskite 'y', 'n' arba 'g': ";
     cin >> mode;
     }
 
-    if (mode == 'y' || mode == 'n') {
+    if (mode == 'y' || mode == 'n' || mode == 'g') {
         if (mode == 'y') {
             ivestis1(n, a); /* Jeigu ZINOMAS mokiniu ir namu darbu skaicius */
         }
-        else {
+        else if (mode == 'n') {
             ivestis2(n, a); /* Jeigu NEZINOMAS mokiniu ir namu darbu skaicius */
+        }
+        else if (mode == 'g') {
+            ivestis3(n, a);
         }
 
         vidurkis(n, a); /* Skaiciuojamas vidurkis tradiciniu budu */
