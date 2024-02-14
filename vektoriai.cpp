@@ -18,15 +18,24 @@ void input(Studentas& duom) {
     cin >> duom.Vardas;
     cout << "Iveskite studento pavarde: ";
     cin >> duom.Pavarde;
-    cout << "Iveskite studento namu darbu kieki (n): ";
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cout << "Iveskite " << i + 1 << " namu darbo rezultata: ";
-        int grade;
-        cin >> grade;
-        duom.namudarbas.push_back(grade);
-    }
+
+    // Use a do-while loop to allow the user to enter more grades or finish
+    char choice;
+    do {
+        cout << "Iveskite studento namu darbu kieki (n): ";
+        int n;
+        cin >> n;
+        for (int i = 0; i < n; i++) {
+            cout << "Iveskite " << i + 1 << " namu darbo rezultata: ";
+            int grade;
+            cin >> grade;
+            duom.namudarbas.push_back(grade);
+        }
+
+        cout << "Ar norite ivesti dar pazymiu? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
     cout << "Iveskite studento egzamino rezultata: ";
     cin >> duom.egzaminorez;
 }
