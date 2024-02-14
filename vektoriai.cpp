@@ -4,6 +4,8 @@
 #include <string>
 #include <bits/stdc++.h>
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -43,6 +45,8 @@ void input(Studentas& duom) {
     char choice;
     int n;
 
+    srand(static_cast<unsigned int>(time(0)));
+
     // Vardo input verification
     do {
         cout << "Iveskite studento varda: ";
@@ -79,8 +83,23 @@ void input(Studentas& duom) {
         int_placeholder = stoi(str_placeholder);
         n = int_placeholder;
 
-        // Namu darbu rezultato input verification
         for (int i = 0; i < n; i++) {
+            cout << "Ar norite atsitiktinai generuoti namu darbo pazymi (y/n): ";
+            cin >> choice;
+
+            while (cin.fail() || (choice != 'y' && choice != 'n')) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "!ERROR! Iveskite 'y' arba 'n': ";
+            cin >> choice;
+            }
+
+            if (choice == 'y'){
+                int_placeholder = rand() % 10 + 1;
+                cout << "Namu darbo pazymys: " << int_placeholder << "." << endl;
+            }
+            else {
+            // Namu darbu rezultato input verification
             do {
                 cout << "Iveskite " << i + 1 << " namu darbo rezultata: ";
                 cin >> str_placeholder;
@@ -90,6 +109,7 @@ void input(Studentas& duom) {
                 }
             } while (!isInt(str_placeholder));
             int_placeholder = stoi(str_placeholder);
+            }
             duom.namudarbas.push_back(int_placeholder);
         }
 
@@ -107,14 +127,30 @@ void input(Studentas& duom) {
 
 
     do {
-        cout << "Iveskite studento egzamino rezultata: ";
-        cin >> str_placeholder;
-                    
-        if (!isInt(str_placeholder)){
-            cout << "!ERROR! Prasome ivesti skaiciu nuo 1 iki 10 !" << endl;
+        cout << "Ar norite atsitiktinai generuoti ezgamino pazymius (y/n): ";
+        cin >> choice;
+
+        while (cin.fail() || (choice != 'y' && choice != 'n')) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "!ERROR! Iveskite 'y' arba 'n': ";
+        cin >> choice;
+        }
+
+        if (choice == 'y'){
+            int_placeholder = rand() % 10 + 1;
+            cout << "Egzamino pazymys: " << int_placeholder << "." << endl;
+        }
+        else {
+            cout << "Iveskite studento egzamino rezultata: ";
+            cin >> str_placeholder;
+                        
+            if (!isInt(str_placeholder)){
+                cout << "!ERROR! Prasome ivesti skaiciu nuo 1 iki 10 !" << endl;
+            }
+            int_placeholder = stoi(str_placeholder);
         }
     } while (!isInt(str_placeholder));
-    int_placeholder = stoi(str_placeholder);
     duom.egzaminorez = int_placeholder;
 }
 
