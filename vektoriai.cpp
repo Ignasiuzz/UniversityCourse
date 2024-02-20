@@ -1,13 +1,14 @@
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <iomanip>
 #include <string>
-#include <bits/stdc++.h>
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 struct Studentas {
     string Vardas, Pavarde;
@@ -194,9 +195,8 @@ void Output(const vector<Studentas>& student) {
     cout << "-----------------------------------------------------------------" << endl;
 }
 
-int main() {
+void manualmode(){
     vector<Studentas> student;
-
     // Tikrinama ar is anksto zinomas studentu skaicius
     char mode;
     cout << "Ar zinomas studentu skaicius (y/n): ";
@@ -223,7 +223,6 @@ int main() {
             }
 
             Output(student);
-            return 0;
         }
         // Jeigu NEZINOMAS studentu ir namu darbu skaicius
         else {
@@ -248,12 +247,71 @@ int main() {
             while (choice == 'y');
 
             Output(student);
-            return 0;
         }
     } 
     else {
         cout << "!ERROR! Kazkas neveikia, paleiskite programa is naujo" << endl;
-        return 0;
     }
+}
+
+void readingmode(){
+    vector<Studentas> student;
+
+    ifstream inputFile("studentai10000.txt");
+
+    if (!inputFile) {
+        cerr << "!ERROR! Unable to open the file." << endl;
+        return;
+    }
+
+    string line;
+    // Ignoruojama pirma eilute
+    getline(inputFile, line);
+    // Pradedamas skaiciuoti laikas
+    auto start = high_resolution_clock::now();
+
+    // SKaitoma ir apdorojama visa eilute
+    while (getline(inputFile, line)) {
+        Studentas duom;
+
+        // Sukurtas "stringstream", kad galetume apdoroti kiekviena eilute
+        istringstream iss(line);
+
+        iss >> duom.Vardas >> duom.Pavarde;
+        for (int i = 0; i < 15; ++i) {
+            int grade;
+            iss >> grade;
+            duom.namudarbas.push_back(grade);
+        }
+        iss >> duom.egzaminorez;
+
+        student.push_back(duom);
+    }
+    inputFile.close();
+
+    Output(student);
+
+    // Stabdomas skaiciuojamas laikas
+    auto stop = high_resolution_clock::now();
+
+    // Skaiciuojamas programos veikimo laikas
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << "Funkcija uztruko " << duration.count() << " mikrosekundes," << endl;
+    double microseconds = duration.count();
+    double seconds = microseconds / 1000000;
+    cout << "kas yra " << fixed << setprecision(6) << seconds << " sekundes.";
+}
+
+int main() {
+    int mode;
+    cout << "Manual input mode - 1" << endl << "Reading mode - 2: " << endl << "Mode: ";
+    cin >> mode;
+
+    if (mode == 1)
+        manualmode();
+    else if (mode == 2)
+        readingmode();
+    else
+        cout << "!ERROR! Invalid mode selected !" << endl;
     return 0;
 }
