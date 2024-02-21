@@ -196,12 +196,12 @@ void Output(const vector<Studentas>& student) {
 }
 
 void OutputBy(const vector<Studentas>& student, int n) {
+    vector<Studentas> sortedStudent = student;
+
     if ( n == 1 ){
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
-
-        vector<Studentas> sortedStudent = student;
 
             sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
             return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
@@ -218,8 +218,6 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
 
-        vector<Studentas> sortedStudent = student;
-
             sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
             return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
             });
@@ -235,8 +233,6 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
 
-        vector<Studentas> sortedStudent = student;
-
             sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
                 return GalutinisVid(a) < GalutinisVid(b);
             });
@@ -251,8 +247,6 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
-
-        vector<Studentas> sortedStudent = student;
 
             sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
                 return GalutinisMed(a) < GalutinisMed(b);
@@ -333,7 +327,7 @@ void readingmode(){
         return;
     }
 
-    cout << endl << "Rusiavimas pagal:" << endl << "Varda - 1" << endl << "Pavarde - 2" << endl << "Vidurki - 3" << endl << "Mediana - 4" << endl;
+    cout << endl << "Sort by:" << endl << "Vardas   - 1," << endl << "Pavarde  - 2," << endl << "Vidurkis - 3," << endl << "Mediana  - 4." << endl << "Sorting: ";
     int sortby;
     cin >> sortby;
 
@@ -351,12 +345,15 @@ void readingmode(){
         istringstream iss(line);
 
         iss >> duom.Vardas >> duom.Pavarde;
-        for (int i = 0; i < 15; ++i) {
-            int grade;
-            iss >> grade;
+        int grade;
+        // Nuskaitomi visi skaiciai iki eilutes galo
+        while (iss >> grade) {
             duom.namudarbas.push_back(grade);
         }
-        iss >> duom.egzaminorez;
+        // Priskiriamas egzamino rezultatas yra paskutinis is nuskaitytu skaicius
+        duom.egzaminorez = duom.namudarbas.back();
+        // Istrinamas paskutinis nuskaitytas skaicius, nes jis yra egzamino rezultatas
+        duom.namudarbas.erase(duom.namudarbas.begin() + (duom.namudarbas.size() - 1 ), duom.namudarbas.end());
 
         student.push_back(duom);
     }
@@ -377,7 +374,7 @@ void readingmode(){
 
 int main() {
     int mode;
-    cout << "Manual input mode - 1" << endl << "Reading mode - 2: " << endl << "Mode: ";
+    cout << "Manual input mode   - 1," << endl << "Read from file mode - 2. " << endl << "Input: ";
     cin >> mode;
 
     if (mode == 1)
