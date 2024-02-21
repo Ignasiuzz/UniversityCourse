@@ -196,7 +196,41 @@ void Output(const vector<Studentas>& student) {
 }
 
 void OutputBy(const vector<Studentas>& student, int n) {
-    if ( n == 1){
+    if ( n == 1 ){
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+
+        vector<Studentas> sortedStudent = student;
+
+            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
+            });
+
+        for (const auto& duom : sortedStudent) {
+            cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
+        }
+        cout << "-----------------------------------------------------------------" << endl;
+    }
+
+    else if ( n == 2 ){
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+
+        vector<Studentas> sortedStudent = student;
+
+            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
+            });
+
+        for (const auto& duom : sortedStudent) {
+            cout << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
+        }
+        cout << "-----------------------------------------------------------------" << endl;
+    }
+
+    else if ( n == 3 ){
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
@@ -213,7 +247,7 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "-----------------------------------------------------------------" << endl;
     }
 
-    else if ( n == 2 ){
+    else if ( n == 4 ){
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
@@ -293,12 +327,15 @@ void manualmode(){
 void readingmode(){
     vector<Studentas> student;
 
-    ifstream inputFile("studentai50.txt");
-
+    ifstream inputFile("studentai10.txt");
     if (!inputFile) {
         cerr << "!ERROR! Unable to open the file." << endl;
         return;
     }
+
+    cout << endl << "Rusiavimas pagal:" << endl << "Varda - 1" << endl << "Pavarde - 2" << endl << "Vidurki - 3" << endl << "Mediana - 4" << endl;
+    int sortby;
+    cin >> sortby;
 
     string line;
     // Ignoruojama pirma eilute
@@ -325,7 +362,7 @@ void readingmode(){
     }
     inputFile.close();
 
-    OutputBy(student, 2);
+    OutputBy(student, sortby);
 
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
