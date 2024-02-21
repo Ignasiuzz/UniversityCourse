@@ -203,9 +203,9 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
 
-            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
-            return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
-            });
+        sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return stoi(a.Vardas.substr(6)) < stoi(b.Vardas.substr(6));
+        });
 
         for (const auto& duom : sortedStudent) {
             cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
@@ -218,9 +218,9 @@ void OutputBy(const vector<Studentas>& student, int n) {
         cout << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
         cout << "-----------------------------------------------------------------" << endl;
 
-            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
-            return a.Pavarde < b.Pavarde || (a.Pavarde == b.Pavarde && a.Vardas < b.Vardas);
-            });
+        sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return stoi(a.Pavarde.substr(7)) < stoi(b.Pavarde.substr(7));
+        });
 
         for (const auto& duom : sortedStudent) {
             cout << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
@@ -321,7 +321,7 @@ void manualmode(){
 void readingmode(){
     vector<Studentas> student;
 
-    ifstream inputFile("studentai10.txt");
+    ifstream inputFile("studentai50.txt");
     if (!inputFile) {
         cerr << "!ERROR! Unable to open the file." << endl;
         return;
