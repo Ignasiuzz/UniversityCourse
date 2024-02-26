@@ -1,4 +1,4 @@
-#ifndef INCLUDES_H
+#ifndef INCLUDES_H // include guard
 #define INCLUDES_H
 
 #include <fstream>

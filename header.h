@@ -1,5 +1,5 @@
-#ifndef STUDENTAS_H
-#define STUDENTAS_H
+#ifndef HEADER_H // include guard
+#define HEADER_H
 
 struct Studentas {
     string Vardas, Pavarde;
@@ -19,4 +19,4 @@ void OutputBy(const vector<Studentas>& student, int n);
 void manualmode();
 void readingmode();
 
-#endif // STUDENTAS_H
+#endif // HEADER_H
