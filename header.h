@@ -1,4 +1,4 @@
-#ifndef HEADER_H // include guard
+#ifndef HEADER_H // redefinition apsauga
 #define HEADER_H
 
 struct Studentas {

@@ -1,4 +1,4 @@
-#ifndef INCLUDES_H // include guard
+#ifndef INCLUDES_H // redefinition apsauga
 #define INCLUDES_H
 
 #include <fstream>

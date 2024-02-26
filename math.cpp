@@ -1,4 +1,6 @@
-// Vidurkiu skaiciavimas
+#ifndef MATH_CPP // redefinition apsauga
+#define MATH_CPP
+
 #include "header.h"
 
 // Apskaiciuojamas namu darbu rezultatu vidurkis
@@ -32,3 +34,5 @@ double GalutinisMed(const Studentas& duom) {
     double ndAverage = Mediana(duom.namudarbas);
     return 0.4 * ndAverage + 0.6 * duom.egzaminorez;
 }
+
+#endif // MATH_CPP
