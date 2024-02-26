@@ -3,6 +3,7 @@
 #include "header.h"
 #include "FileInput.cpp"
 #include "ManualInput.cpp"
+#include "Verification.cpp"
 
 bool isString(const string& str_placeholder){
     for (char c : str_placeholder) {
@@ -29,15 +30,19 @@ bool isInt(const string& str_placeholder){
 }
 
 int main() {
-    int mode;
-    cout << "Manual input mode   - 1," << endl << "Read from file mode - 2. " << endl << "Input: ";
-    cin >> mode;
+    try {
+        int mode = NumberVerification("Manual input mode   - 1,\nRead from file mode - 2.\nInput: ", 1, 2);
 
-    if (mode == 1)
-        manualmode();
-    else if (mode == 2)
-        readingmode();
-    else
-        cout << "!ERROR! Invalid mode selected !" << endl;
+        if (mode == 1) {
+            manualmode();
+        } else {
+            readingmode();
+        }
+
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
+        return 1; // Return a non-zero value to indicate an error
+    }
+
     return 0;
 }

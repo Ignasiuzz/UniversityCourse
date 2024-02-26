@@ -18,5 +18,6 @@ void Output(const vector<Studentas>& student);
 void OutputBy(const vector<Studentas>& student, int n);
 void manualmode();
 void readingmode();
+int NumberVerification(const string& prompt, int minValue, int maxValue);
 
 #endif // HEADER_H

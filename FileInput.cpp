@@ -1,26 +1,22 @@
 // FileInput.cpp
 #include "math.cpp"
 #include "includes.h"
+#include "Verification.cpp"
 
 void readingmode(){
     vector<Studentas> student;
-    // Input file name
+
     ifstream inputFile("studentai100.txt");
     if (!inputFile) {
         cerr << "!ERROR! Unable to open the file." << endl;
         return;
     }
 
-    cout << endl << "Sort by:" << endl << "Vardas   - 1," << endl << "Pavarde  - 2," << endl << "Vidurkis - 3," << endl << "Mediana  - 4." << endl << "Sorting: ";
-    int sortby;
-    cin >> sortby;
-
-    string line;
-    // Ignoruojama pirma eilute
-    getline(inputFile, line);
-
     // Pradedamas skaiciuoti laikas
     auto start = high_resolution_clock::now();
+
+    string line;
+    getline(inputFile, line);
 
     // SKaitoma ir apdorojama visa eilute
     while (getline(inputFile, line)) {
@@ -46,7 +42,9 @@ void readingmode(){
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
 
-    OutputBy(student, sortby);
+    // Input verification
+    int placeholder = NumberVerification("Sort by:\nVardas   - 1,\nPavarde  - 2,\nVidurkis - 3,\nMediana  - 4.\nSorting: ", 1, 4);
+    OutputBy(student, placeholder);
 
     // Skaiciuojamas programos veikimo laikas
     auto duration = duration_cast<microseconds>(stop - start);
@@ -56,6 +54,7 @@ void readingmode(){
     cout << "kas yra " << fixed << setprecision(6) << seconds << " sekundes.";
 }
 
+// Output by selected sorting
 void OutputBy(const vector<Studentas>& student, int n) {
     vector<Studentas> sortedStudent = student;
 
