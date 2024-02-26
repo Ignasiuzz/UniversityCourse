@@ -7,9 +7,9 @@ struct Studentas {
     int egzaminorez;
 };
 
-bool isString(const string& str_placeholder);
-bool isInt(const string& str_placeholder);
-void input(Studentas& duom);
+void input1(Studentas& duom);
+void input2(Studentas& duom);
+void input3(Studentas& duom);
 double Vidurkis(const vector<int>& namudarbas);
 double GalutinisVid(const Studentas& duom);
 double Mediana(const vector<int>& namudarbas);
@@ -19,5 +19,6 @@ void OutputBy(const vector<Studentas>& student, int n);
 void manualmode();
 void readingmode();
 int NumberVerification(const string& prompt, int minValue, int maxValue);
+int YesNoVerification(const string& prompt);
 
 #endif // HEADER_H

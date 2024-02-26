@@ -5,10 +5,16 @@
 
 void readingmode(){
     vector<Studentas> student;
+    ifstream inputFile;
+    try {
+        inputFile.open("studentai100.txt");
 
-    ifstream inputFile("studentai100.txt");
-    if (!inputFile) {
-        cerr << "!ERROR! Unable to open the file." << endl;
+        if (!inputFile) {
+            throw invalid_argument("Neimanoma atidaryti failo.");
+        }
+    }
+    catch (const invalid_argument& e) {
+        cerr << "!ERROR! " << e.what() << endl;
         return;
     }
 
