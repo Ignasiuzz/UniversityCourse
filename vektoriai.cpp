@@ -1,20 +1,6 @@
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <iomanip>
-#include <string>
-#include <algorithm>
-#include <chrono>
-
-using namespace std;
-using namespace std::chrono;
-
-struct Studentas {
-    string Vardas, Pavarde;
-    vector<int> namudarbas;
-    int egzaminorez;
-};
+#include "includes.h"
+#include "header.h"
+#include "math.cpp"
 
 bool isString(const string& str_placeholder){
     for (char c : str_placeholder) {
@@ -155,36 +141,6 @@ void input(Studentas& duom) {
     duom.egzaminorez = int_placeholder;
 }
 
-double Vidurkis(const vector<int>& namudarbas) {
-    double sum = 0;
-    for (int i = 0; i < namudarbas.size(); i++) {
-        sum += namudarbas[i];
-    }
-    return sum / namudarbas.size();
-}
-
-double GalutinisVid(const Studentas& duom) {
-    double ndAverage = Vidurkis(duom.namudarbas);
-    return 0.4 * ndAverage + 0.6 * duom.egzaminorez;
-}
-
-double Mediana(const vector<int>& namudarbas) {
-    vector<int> sortedVector = namudarbas;
-    sort(sortedVector.begin(), sortedVector.end());
-
-    if (sortedVector.size() % 2 == 0) {
-        return (sortedVector[sortedVector.size() / 2 - 1] + sortedVector[sortedVector.size() / 2]) / 2.0;
-    } 
-    else {
-        return sortedVector[sortedVector.size() / 2];
-    }
-}
-
-double GalutinisMed(const Studentas& duom) {
-    double ndAverage = Mediana(duom.namudarbas);
-    return 0.4 * ndAverage + 0.6 * duom.egzaminorez;
-}
-
 void Output(const vector<Studentas>& student) {
     cout << "-----------------------------------------------------------------" << endl;
     cout << "Pavarde        Vardas         Galutinis (Vid.) / Galutinis (Med.)" << endl;
@@ -320,8 +276,8 @@ void manualmode(){
 
 void readingmode(){
     vector<Studentas> student;
-
-    ifstream inputFile("studentai50.txt");
+    // Input file name
+    ifstream inputFile("studentai100.txt");
     if (!inputFile) {
         cerr << "!ERROR! Unable to open the file." << endl;
         return;
@@ -334,6 +290,7 @@ void readingmode(){
     string line;
     // Ignoruojama pirma eilute
     getline(inputFile, line);
+
     // Pradedamas skaiciuoti laikas
     auto start = high_resolution_clock::now();
 
@@ -342,31 +299,30 @@ void readingmode(){
         Studentas duom;
 
         // Sukurtas "stringstream", kad galetume apdoroti kiekviena eilute
-        istringstream iss(line);
+        istringstream get(line);
 
-        iss >> duom.Vardas >> duom.Pavarde;
+        get >> duom.Vardas >> duom.Pavarde;
         int grade;
         // Nuskaitomi visi skaiciai iki eilutes galo
-        while (iss >> grade) {
+        while (get >> grade) {
             duom.namudarbas.push_back(grade);
         }
         // Priskiriamas egzamino rezultatas yra paskutinis is nuskaitytu skaicius
         duom.egzaminorez = duom.namudarbas.back();
-        // Istrinamas paskutinis nuskaitytas skaicius, nes jis yra egzamino rezultatas
-        duom.namudarbas.erase(duom.namudarbas.begin() + (duom.namudarbas.size() - 1 ), duom.namudarbas.end());
+        duom.namudarbas.pop_back();
 
         student.push_back(duom);
     }
     inputFile.close();
 
-    OutputBy(student, sortby);
-
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
 
+    OutputBy(student, sortby);
+
     // Skaiciuojamas programos veikimo laikas
     auto duration = duration_cast<microseconds>(stop - start);
-    cout << "Funkcija uztruko " << duration.count() << " mikrosekundes," << endl;
+    cout << "Failo nuskaitymas uztruko " << duration.count() << " mikrosekundes," << endl;
     double microseconds = duration.count();
     double seconds = microseconds / 1000000;
     cout << "kas yra " << fixed << setprecision(6) << seconds << " sekundes.";
