@@ -9,6 +9,8 @@
 #include <string>
 #include <algorithm>
 #include <chrono>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 using namespace std::chrono;

@@ -7,7 +7,8 @@
 
 int main() {
 
-    int mode = NumberVerification("Manual input mode   - 1,\nRead from file mode - 2.\nInput: ", 1, 2);
+    cout << "---------------------------------------- " << endl;
+    int mode = NumberVerification("Manual input mode   [1]\nRead from file mode [2]\nInput: ", 1, 2);
 
     if (mode == 1) {
         manualmode();

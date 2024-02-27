@@ -22,8 +22,7 @@ int NumberVerification(const string& prompt, int minValue, int maxValue) {
             if (value < minValue || value > maxValue) {
                 throw out_of_range("Ivestis uz diapazono ribu. Prasome ivesti skaiciu nuo " + to_string(minValue) + " iki " + to_string(maxValue) + ".");
             }
-
-            // If we reach here, the input is valid
+            
             return value;
         } catch (const invalid_argument& e) {
             cerr << "!Error! Prasome ivesti SVEIKAJI skaiciu." << endl;

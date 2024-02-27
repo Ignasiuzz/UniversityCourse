@@ -9,10 +9,10 @@ struct Studentas {
 
 void input1(Studentas& duom);
 void input2(Studentas& duom);
-void input3(Studentas& duom);
+void input3(Studentas& duom, int n);
 double Vidurkis(const vector<int>& namudarbas);
-double GalutinisVid(const Studentas& duom);
 double Mediana(const vector<int>& namudarbas);
+double GalutinisVid(const Studentas& duom);
 double GalutinisMed(const Studentas& duom);
 void Output(const vector<Studentas>& student);
 void OutputBy(const vector<Studentas>& student, int n);

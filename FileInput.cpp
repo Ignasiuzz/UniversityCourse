@@ -49,7 +49,8 @@ void readingmode(){
     auto stop = high_resolution_clock::now();
 
     // Input verification
-    int placeholder = NumberVerification("Sort by:\nVardas   - 1,\nPavarde  - 2,\nVidurkis - 3,\nMediana  - 4.\nSorting: ", 1, 4);
+    cout << "---------------------------------------- " << endl;
+    int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
     OutputBy(student, placeholder);
 
     // Skaiciuojamas programos veikimo laikas
