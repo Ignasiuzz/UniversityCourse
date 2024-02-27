@@ -12,7 +12,8 @@ int main() {
 
     if (mode == 1) {
         manualmode();
-    } else {
+    } 
+    else if (mode == 2) {
         readingmode();
     }
 
