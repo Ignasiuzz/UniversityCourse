@@ -1,3 +1,4 @@
+// Verification.cpp
 #ifndef VERIFICATION_CPP // redefinition apsauga
 #define VERIFICATION_CPP
 
@@ -12,13 +13,15 @@ int NumberVerification(const string& prompt, int minValue, int maxValue) {
         cout << prompt;
         try {
             cin >> input;
-            size_t pos;
-            value = stoi(input, &pos);
+            // Paverciame string i integeri
+            value = stoi(input);
 
-            if (pos < input.size()) {
-                throw invalid_argument("");  // Jeigu ivestas ne sveikasis skaicius
+            // Paziurime ar convertuotas int yra mazesnis uz inputo dydi
+            if (value < input.size()) {
+                throw invalid_argument("");
             }
 
+            // Patikriname ar skaicius yra tarp nurodytu dvieju skaiciu
             if (value < minValue || value > maxValue) {
                 throw out_of_range("Ivestis uz diapazono ribu. Prasome ivesti skaiciu nuo " + to_string(minValue) + " iki " + to_string(maxValue) + ".");
             }
@@ -44,18 +47,19 @@ int NumberVerification(const string& prompt, int minValue) {
         cout << prompt;
         try {
             cin >> input;
-            size_t pos;
-            value = stoi(input, &pos);
-
-            if (pos < input.size()) {
-                throw invalid_argument("");  // Jeigu ivestas ne sveikasis skaicius
+            // Paverciame string i integeri
+            value = stoi(input);
+            
+            // Paziurime ar convertuotas int yra mazesnis uz inputo dydi
+            if (value < input.size()) {
+                throw invalid_argument("");
             }
-
+            
+            // Patikriname ar skaicius yra didnesnis uz nurodyta skaiciu
             if (value < minValue) {
                 throw out_of_range("Input is below the minimum allowed value. Please enter a number greater than or equal to " + to_string(minValue) + ".");
             }
 
-            // If we reach here, the input is valid
             return value;
         } catch (const invalid_argument& e) {
             cerr << "!Error! Prasome ivesti SVEIKAJI skaiciu." << endl;
@@ -76,7 +80,7 @@ int YesNoVerification(const string& prompt) {
         cout << prompt;
         try {
             cin >> input;
-
+            // Tikriname ar buvo ivesta tik 'y' arba tik 'n'
             if ( input == 'y' || input == 'n' )
                 return input;
             else 

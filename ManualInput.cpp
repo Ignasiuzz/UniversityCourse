@@ -12,6 +12,7 @@ void manualmode(){
     int_temp = NumberVerification("Zinomas mokiniu ir pazymiu skaicius   [1]\nNezinomas mokiniu ir pazymiu skaicius [2]\nGeneruoti mokinius ir pazymius        [3]\nInput: ", 1, 3);
     cout << "---------------------------------------- " << endl;
     
+    // Zinomas mokiniu ir pazymiu skaicius
     if (int_temp == 1) {
         int m = NumberVerification("Iveskite studentu skaiciu: ", 1);
         vector<Studentas> student(m);
@@ -22,6 +23,7 @@ void manualmode(){
 
         Output(student);
     }
+    // Nezinomas mokiniu ir pazymiu skaicius
     else if (int_temp == 2){
         do {
         Studentas duom;
@@ -34,6 +36,7 @@ void manualmode(){
 
         Output(student);
     }
+    // Generuoti mokinius ir pazymius
     else if (int_temp == 3){
         int m = NumberVerification("Iveskite studentu skaiciu: ", 1);
         int n = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);

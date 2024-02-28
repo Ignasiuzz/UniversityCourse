@@ -1,4 +1,4 @@
-//vektoriai.cpp
+//main.cpp
 #include "includes.h"
 #include "header.h"
 #include "FileInput.cpp"
