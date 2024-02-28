@@ -3,16 +3,16 @@
 #include "includes.h"
 #include "Verification.cpp"
 
-char str_placeholder;
-int int_placeholder;
+char string_temp;
+int int_temp;
 
 void manualmode(){
     vector<Studentas> student;
     cout << "---------------------------------------- " << endl;
-    int_placeholder = NumberVerification("Zinomas mokiniu ir pazymiu skaicius   [1]\nNezinomas mokiniu ir pazymiu skaicius [2]\nGeneruoti mokinius ir pazymius        [3]\nInput: ", 1, 3);
+    int_temp = NumberVerification("Zinomas mokiniu ir pazymiu skaicius   [1]\nNezinomas mokiniu ir pazymiu skaicius [2]\nGeneruoti mokinius ir pazymius        [3]\nInput: ", 1, 3);
     cout << "---------------------------------------- " << endl;
     
-    if (int_placeholder == 1) {
+    if (int_temp == 1) {
         int m = NumberVerification("Iveskite studentu skaiciu: ", 1);
         vector<Studentas> student(m);
 
@@ -22,19 +22,19 @@ void manualmode(){
 
         Output(student);
     }
-    else if (int_placeholder == 2){
+    else if (int_temp == 2){
         do {
         Studentas duom;
         input2(duom);
         student.push_back(duom);
 
-        str_placeholder = YesNoVerification("Ar norite ivesti kita studenta? (y/n): ");
+        string_temp = YesNoVerification("Ar norite ivesti kita studenta? (y/n): ");
         }
-        while (str_placeholder == 'y');
+        while (string_temp == 'y');
 
         Output(student);
     }
-    else if (int_placeholder == 3){
+    else if (int_temp == 3){
         int m = NumberVerification("Iveskite studentu skaiciu: ", 1);
         int n = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);
         srand(time(0));
@@ -56,14 +56,14 @@ void input1(Studentas& duom) {
     cout << "Iveskite studento pavarde: ";
     cin >> duom.Pavarde;
 
-    int_placeholder = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);
-    for (int i = 0; i < int_placeholder; i++) {
-        int int_placeholder = NumberVerification("Iveskite namu darbo rezultata: ", 1, 10);
-        duom.namudarbas.push_back(int_placeholder);
+    int_temp = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);
+    for (int i = 0; i < int_temp; i++) {
+        int int_temp = NumberVerification("Iveskite namu darbo rezultata: ", 1, 10);
+        duom.namudarbas.push_back(int_temp);
     }
     
-    int_placeholder = NumberVerification("Iveskite studento egzamino rezultata:", 1, 10);
-    duom.egzaminorez = int_placeholder;
+    int_temp = NumberVerification("Iveskite studento egzamino rezultata:", 1, 10);
+    duom.egzaminorez = int_temp;
 }
 
 void input2(Studentas& duom) {
@@ -74,18 +74,18 @@ void input2(Studentas& duom) {
     cin >> duom.Pavarde;
 
     do {
-        int_placeholder = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);
-        for (int i = 0; i < int_placeholder; i++) {
-            int int_placeholder = NumberVerification("Iveskite namu darbo rezultata: ", 1, 10);
-            duom.namudarbas.push_back(int_placeholder);
+        int_temp = NumberVerification("Iveskite studento namu darbu kieki (n): ", 1);
+        for (int i = 0; i < int_temp; i++) {
+            int int_temp = NumberVerification("Iveskite namu darbo rezultata: ", 1, 10);
+            duom.namudarbas.push_back(int_temp);
         }
 
-        str_placeholder = YesNoVerification("Ar norite ivesti dar pazymiu? (y/n): ");
+        string_temp = YesNoVerification("Ar norite ivesti dar pazymiu? (y/n): ");
         
-    } while (str_placeholder == 'y');
+    } while (string_temp == 'y');
     
-    int_placeholder = NumberVerification("Iveskite studento egzamino rezultata:", 1, 10);
-    duom.egzaminorez = int_placeholder;
+    int_temp = NumberVerification("Iveskite studento egzamino rezultata:", 1, 10);
+    duom.egzaminorez = int_temp;
 }
 
 void input3(Studentas& duom, int n) {
