@@ -14,11 +14,11 @@ double Vidurkis(const vector<int>& namudarbas);
 double Mediana(const vector<int>& namudarbas);
 double GalutinisVid(const Studentas& duom);
 double GalutinisMed(const Studentas& duom);
-void Output(const vector<Studentas>& student);
-void OutputBy(const vector<Studentas>& student, int n);
+void OutputBy(const vector<Studentas>& student);
 void manualmode();
 void readingmode();
 int NumberVerification(const string& prompt, int minValue, int maxValue);
+int NumberVerification(const string& prompt, int minValue);
 int YesNoVerification(const string& prompt);
 
 #endif // HEADER_H
