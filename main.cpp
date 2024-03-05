@@ -22,7 +22,7 @@ void readingmode(){
     vector<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("studentai100.txt");
+        inputFile.open("100000_GeneratedStudents.txt");
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -180,7 +180,7 @@ void OutputBy(const vector<Studentas>& student) {
     int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
 
     if ( placeholder == 1 ) {
-
+    cout << "Pradetas rusiavimas" << endl;
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
         string vardasA = a.Vardas;
         string vardasB = b.Vardas;
@@ -199,7 +199,8 @@ void OutputBy(const vector<Studentas>& student) {
             return vardasA < vardasB;
         }
     });
-    
+    cout << "Pabaigtas rusiavimas" << endl;
+
         int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
         if (n == 1){
             cout << "-----------------------------------------------------------------" << endl;
@@ -211,14 +212,22 @@ void OutputBy(const vector<Studentas>& student) {
             cout << "-----------------------------------------------------------------" << endl;
         }
         else if (n == 2) {
+            cout << "Pradetas isvedimas" << endl;
             string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
             FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
             FileOff << "-----------------------------------------------------------------" << endl;
             for (const auto& duom : sortedStudent) {
-                FileOff << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                stringstream studentData;
+                studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
+                FileOff << studentData.str() << endl;
             }
+            cout << "Baigtas isvedimas" << endl;
+                // Flush the output buffer to ensure immediate write to the file
+            FileOff.flush();
+            // Optionally, you can also close the file explicitly
+            FileOff.close();
         }
     }
 
@@ -260,7 +269,9 @@ void OutputBy(const vector<Studentas>& student) {
             FileOff << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
             FileOff << "-----------------------------------------------------------------" << endl;
             for (const auto& duom : sortedStudent) {
-                FileOff << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) <<endl;
+                stringstream studentData;
+                studentData << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
+                FileOff << studentData.str() << endl;
             }
         }
     }
@@ -288,7 +299,9 @@ void OutputBy(const vector<Studentas>& student) {
             FileOff << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)  " << endl;
             FileOff << "-----------------------------------------------------------------" << endl;
             for (const auto& duom : sortedStudent) {
-                FileOff << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                stringstream studentData;
+                studentData << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom);
+                FileOff << studentData.str() << endl;
             }
         }
     }
@@ -316,7 +329,9 @@ void OutputBy(const vector<Studentas>& student) {
             FileOff << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)  " << endl;
             FileOff << "-----------------------------------------------------------------" << endl;
             for (const auto& duom : sortedStudent) {
-            FileOff << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                stringstream studentData;
+                studentData << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom);
+                FileOff << studentData.str() << endl;
             }
         }
     }
@@ -353,7 +368,7 @@ void filegeneration(){
         FileOff << studentData.str() << endl;
     }
     FileOff.close();
-    cout << "Generation finished";
+    cout << "Generation finished" << endl;
 
     // File reading
     vector<Studentas> student;
@@ -380,7 +395,7 @@ void filegeneration(){
         student.push_back(duom);
     }
     FileIn.close();
-    cout << "Reading finished";
+    cout << "Reading finished" << endl;
 
     vector<Studentas> nuskriaustukai;
     vector<Studentas> kietiakiai;
