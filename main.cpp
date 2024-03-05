@@ -22,7 +22,7 @@ void readingmode(){
     vector<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("10_GeneratedStudents.txt");
+        inputFile.open("studentai100.txt");
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -177,13 +177,9 @@ void input3(Studentas& duom, int n) {
 /* Output by selected sorting */
 void OutputBy(const vector<Studentas>& student) {
     vector<Studentas> sortedStudent = student;
-
     int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
 
     if ( placeholder == 1 ) {
-    cout << "-----------------------------------------------------------------" << endl;
-    cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-    cout << "-----------------------------------------------------------------" << endl;
 
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
         string vardasA = a.Vardas;
@@ -203,19 +199,32 @@ void OutputBy(const vector<Studentas>& student) {
             return vardasA < vardasB;
         }
     });
-
-        for (const auto& duom : sortedStudent) {
-            cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(15) << fixed << setprecision(2) << GalutinisVid(duom) << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+    
+        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        if (n == 1){
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            cout << "-----------------------------------------------------------------" << endl;
+                for (const auto& duom : sortedStudent) {
+                    cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                }
+            cout << "-----------------------------------------------------------------" << endl;
         }
-        cout << "-----------------------------------------------------------------" << endl;
+        else if (n == 2) {
+            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            ofstream FileOff(fileName);
+            FileOff << "-----------------------------------------------------------------" << endl;
+            FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            FileOff << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                FileOff << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+            }
+        }
     }
 
     else if ( placeholder == 2 ){
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
 
-        sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+    sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
         string PavardeA = a.Pavarde;
         string PavardeB = b.Pavarde;
 
@@ -232,42 +241,84 @@ void OutputBy(const vector<Studentas>& student) {
             // Compare regular names
             return PavardeA < PavardeB;
         }
-        });
+    });
 
-        for (const auto& duom : sortedStudent) {
-            cout << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(15)<<fixed<<setprecision(2) << GalutinisVid(duom) << setw(19)<<fixed<<setprecision(2) << GalutinisMed(duom) << endl;
+        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        if (n == 1){
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            cout << "-----------------------------------------------------------------" << endl;
+                for (const auto& duom : sortedStudent) {
+                    cout << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed<<setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                }
+            cout << "-----------------------------------------------------------------" << endl;
         }
-        cout << "-----------------------------------------------------------------" << endl;
+        else if (n == 2) {
+            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            ofstream FileOff(fileName);
+            FileOff << "-----------------------------------------------------------------" << endl;
+            FileOff << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            FileOff << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                FileOff << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) <<endl;
+            }
+        }
     }
 
     else if ( placeholder == 3 ){
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
 
-            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
-                return GalutinisVid(a) < GalutinisVid(b);
-            });
+        sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return GalutinisVid(a) < GalutinisVid(b);
+        });
 
-        for (const auto& duom : sortedStudent) {
-            cout << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        if (n == 1){
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)  " << endl;
+            cout << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                cout << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+            }
+            cout << "-----------------------------------------------------------------" << endl;
         }
-        cout << "-----------------------------------------------------------------" << endl;
+        else if (n == 2) {
+            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            ofstream FileOff(fileName);
+            FileOff << "-----------------------------------------------------------------" << endl;
+            FileOff << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)  " << endl;
+            FileOff << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                FileOff << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+            }
+        }
     }
 
     else if ( placeholder == 4 ){
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
 
-            sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
-                return GalutinisMed(a) < GalutinisMed(b);
-            });
+        sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
+            return GalutinisMed(a) < GalutinisMed(b);
+        });
 
-        for (const auto& duom : sortedStudent) {
-            cout << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        if (n == 1){
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)  " << endl;
+            cout << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                cout << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+            }
+            cout << "-----------------------------------------------------------------" << endl;
         }
-        cout << "-----------------------------------------------------------------" << endl;
+        else if (n == 2) {
+            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            ofstream FileOff(fileName);
+            FileOff << "-----------------------------------------------------------------" << endl;
+            FileOff << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)  " << endl;
+            FileOff << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+            FileOff << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+            }
+        }
     }
 }
 
@@ -275,7 +326,7 @@ void filegeneration(){
     RandInt rnd {1, 10}; /* Pazymiu diapozonas costum RandInt.hpp klasei */
 
     int n = NumberVerification("Kiek studentu norime generuoti: ", 1);
-    int m = 10; // Pazymiu skaicius
+    int m = 10; // Pazymiu skaicius (galima pakeisti i NumberVerification jeigu norime galeti pasirinkti paziumiu skaiciu)
 
     // File creation
     string fileName = to_string(n) + "_GeneratedStudents.txt";
@@ -329,6 +380,7 @@ void filegeneration(){
         student.push_back(duom);
     }
     FileIn.close();
+    cout << "Reading finished";
 
     vector<Studentas> nuskriaustukai;
     vector<Studentas> kietiakiai;
@@ -340,10 +392,7 @@ void filegeneration(){
             kietiakiai.push_back(duom);
         }
     }
-    for (const auto& duom : nuskriaustukai){
-        cout<< GalutinisVid(duom) << endl;
-    }
-    cout << "-----------------------------------------------------------------" << endl;
+    OutputBy(kietiakiai);
 }
 
 // Apskaiciuojamas namu darbu rezultatu vidurkis
