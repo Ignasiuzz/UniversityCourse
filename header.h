@@ -17,6 +17,7 @@ double GalutinisMed(const Studentas& duom);
 void OutputBy(const vector<Studentas>& student);
 void manualmode();
 void readingmode();
+void filegeneration();
 int NumberVerification(const string& prompt, int minValue, int maxValue);
 int NumberVerification(const string& prompt, int minValue);
 int YesNoVerification(const string& prompt);
