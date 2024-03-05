@@ -3,13 +3,16 @@
 
 int main() {
     cout << "---------------------------------------- " << endl;
-    int mode = NumberVerification("Manual input mode   [1]\nRead from file mode [2]\nInput: ", 1, 2);
+    int mode = NumberVerification("Manual input mode   [1]\nRead from file mode [2]\nFile Generator      [3]\nInput: ", 1, 3);
 
     if (mode == 1) {
         manualmode();
     } 
     else if (mode == 2) {
         readingmode();
+    }
+    else if (mode == 3){
+        filegeneration();
     }
     return 0;
 }
@@ -19,7 +22,7 @@ void readingmode(){
     vector<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("studentai100.txt");
+        inputFile.open("10_GeneratedStudents.txt");
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -266,6 +269,81 @@ void OutputBy(const vector<Studentas>& student) {
         }
         cout << "-----------------------------------------------------------------" << endl;
     }
+}
+
+void filegeneration(){
+    RandInt rnd {1, 10}; /* Pazymiu diapozonas costum RandInt.hpp klasei */
+
+    int n = NumberVerification("Kiek studentu norime generuoti: ", 1);
+    int m = 10; // Pazymiu skaicius
+
+    // File creation
+    string fileName = to_string(n) + "_GeneratedStudents.txt";
+    ofstream FileOff(fileName);
+
+    // File writing
+    stringstream Header;
+    Header << left << setw(15) << "Vardas" << setw(16) << "Pavarde";
+    for (int i = 0; i < m-1; ++i){
+        Header << "ND" + to_string(i+1) << "\t";
+    }
+    Header << "Egz.";
+    FileOff << Header.str() << endl;
+
+    // Generation
+    for (int i = 0; i < n; ++i) {
+        stringstream studentData;
+        studentData << left << setw(15) << "Vardas" + to_string(i+1) << setw(16) << "Pavarde" + to_string(i+1);
+
+        for (int j = 0; j < m; ++j) {
+            studentData << rnd() << "\t"; /* Costum RandInt.hpp klase skirta skaiciu generavimui */
+        }
+
+        FileOff << studentData.str() << endl;
+    }
+    FileOff.close();
+    cout << "Generation finished";
+
+    // File reading
+    vector<Studentas> student;
+    ifstream FileIn(fileName);
+
+    string line;
+    getline(FileIn, line);
+
+    while (getline(FileIn, line)) {
+        Studentas duom;
+
+        stringstream get(line);
+
+        get >> duom.Vardas >> duom.Pavarde;
+        int grade;
+        // Nuskaitomi visi skaiciai iki eilutes galo
+        while (get >> grade) {
+            duom.namudarbas.push_back(grade);
+        }
+        // Priskiriamas egzamino rezultatas yra paskutinis is nuskaitytu skaicius
+        duom.egzaminorez = duom.namudarbas.back();
+        duom.namudarbas.pop_back();
+
+        student.push_back(duom);
+    }
+    FileIn.close();
+
+    vector<Studentas> nuskriaustukai;
+    vector<Studentas> kietiakiai;
+    for (const auto& duom : student) {
+        if (GalutinisVid(duom) < 5){
+            nuskriaustukai.push_back(duom);
+        }
+        else{
+            kietiakiai.push_back(duom);
+        }
+    }
+    for (const auto& duom : nuskriaustukai){
+        cout<< GalutinisVid(duom) << endl;
+    }
+    cout << "-----------------------------------------------------------------" << endl;
 }
 
 // Apskaiciuojamas namu darbu rezultatu vidurkis
