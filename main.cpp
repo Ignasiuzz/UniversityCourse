@@ -1,4 +1,6 @@
 //main.cpp
+// g++ -o main main.cpp functions.cpp
+// main.exe
 #include "functions.h"
 #include "main.h"
 
