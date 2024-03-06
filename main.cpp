@@ -174,8 +174,9 @@ void OutputBy(const vector<Studentas>& student) {
     vector<Studentas> sortedStudent = student;
     string file;
 
+    // Skirta failu uzvadinimui, tikrinima ar isvedami kietiakai ar nuskriaustukai
     if (GalutinisVid(sortedStudent[0])>=5){
-        file = "Kietiakiai";
+        file = "Kietiakai";
     }
     else {
         file = "Nuskriaustukai";
@@ -215,7 +216,6 @@ void OutputBy(const vector<Studentas>& student) {
             cout << "-----------------------------------------------------------------" << endl;
         }
         else if (n == 2) {
-            cout << "Pradetas isvedimas" << endl;
             string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
