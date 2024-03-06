@@ -1,24 +1,25 @@
+//header.h
 #ifndef HEADER_H // redefinition apsauga
 #define HEADER_H
+
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <chrono>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+using namespace std::chrono;
 
 struct Studentas {
     string Vardas, Pavarde;
     vector<int> namudarbas;
     int egzaminorez;
 };
-
-void input1(Studentas& duom);
-void input2(Studentas& duom);
-void input3(Studentas& duom, int n);
-double Vidurkis(const vector<int>& namudarbas);
-double Mediana(const vector<int>& namudarbas);
-double GalutinisVid(const Studentas& duom);
-double GalutinisMed(const Studentas& duom);
-void OutputBy(const vector<Studentas>& student);
-void manualmode();
-void readingmode();
-int NumberVerification(const string& prompt, int minValue, int maxValue);
-int NumberVerification(const string& prompt, int minValue);
-int YesNoVerification(const string& prompt);
 
 #endif // HEADER_H
