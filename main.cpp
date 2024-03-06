@@ -172,6 +172,15 @@ void input3(Studentas& duom, int n) {
 /* Output by selected sorting */
 void OutputBy(const vector<Studentas>& student) {
     vector<Studentas> sortedStudent = student;
+    string file;
+
+    if (GalutinisVid(sortedStudent[0])>=5){
+        file = "Kietiakiai";
+    }
+    else {
+        file = "Nuskriaustukai";
+    }
+
     int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
 
     auto start = high_resolution_clock::now();
@@ -207,7 +216,7 @@ void OutputBy(const vector<Studentas>& student) {
         }
         else if (n == 2) {
             cout << "Pradetas isvedimas" << endl;
-            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
             FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
@@ -252,7 +261,7 @@ void OutputBy(const vector<Studentas>& student) {
             cout << "-----------------------------------------------------------------" << endl;
         }
         else if (n == 2) {
-            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
             FileOff << "Pavarde         Vardas        Galutinis (Vid.) / Galutinis (Med.)" << endl;
@@ -282,7 +291,7 @@ void OutputBy(const vector<Studentas>& student) {
             cout << "-----------------------------------------------------------------" << endl;
         }
         else if (n == 2) {
-            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
             FileOff << "Galutinis (Vid.) Pavarde        Vardas         Galutinis (Med.)  " << endl;
@@ -312,7 +321,7 @@ void OutputBy(const vector<Studentas>& student) {
             cout << "-----------------------------------------------------------------" << endl;
         }
         else if (n == 2) {
-            string fileName = to_string(sortedStudent.size()) + "_Studentai.txt";
+            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
             ofstream FileOff(fileName);
             FileOff << "-----------------------------------------------------------------" << endl;
             FileOff << "Galutinis (Med.) Pavarde        Vardas         Galutinis (vid.)  " << endl;
@@ -327,7 +336,7 @@ void OutputBy(const vector<Studentas>& student) {
 
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Writing finished! Student data writing took " << diff.count() << " seconds." << endl;
+    cout << "Writing finished! " + file + " Student data writing took " << diff.count() << " seconds." << endl;
 }
 
 void filegeneration(){
