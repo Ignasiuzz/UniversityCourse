@@ -226,6 +226,7 @@ void OutputBy(const vector<Studentas>& student) {
                 studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
                 FileOff << studentData.str() << endl;
             }
+            FileOff.close();
         }
     }
 
@@ -271,6 +272,7 @@ void OutputBy(const vector<Studentas>& student) {
                 studentData << left << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
                 FileOff << studentData.str() << endl;
             }
+            FileOff.close();
         }
     }
 
@@ -301,6 +303,7 @@ void OutputBy(const vector<Studentas>& student) {
                 studentData << left << setw(17) << fixed << setprecision(2) << GalutinisVid(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom);
                 FileOff << studentData.str() << endl;
             }
+            FileOff.close();
         }
     }
 
@@ -331,6 +334,7 @@ void OutputBy(const vector<Studentas>& student) {
                 studentData << left << setw(17) << fixed << setprecision(2) << GalutinisMed(duom) << setw(15) << duom.Pavarde << setw(15) << duom.Vardas << setw(19) << fixed << setprecision(2) << GalutinisMed(duom);
                 FileOff << studentData.str() << endl;
             }
+            FileOff.close();
         }
     }
 
