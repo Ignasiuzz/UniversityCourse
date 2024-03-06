@@ -9,7 +9,7 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode();
+        readingmode("studentai10000.txt");
     }
     else if (mode == 3){
         filegeneration();
@@ -18,11 +18,11 @@ int main() {
 }
 
 /* READING FROM FILE MODE */
-void readingmode(){
+void readingmode(const string& fileName){
     vector<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("100000_GeneratedStudents.txt");
+        inputFile.open(fileName);
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -62,15 +62,10 @@ void readingmode(){
 
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Reading finished! File reading took " << diff.count() << " seconds." << endl;
 
-    OutputBy(student);
-
-    // Skaiciuojamas programos veikimo laikas
-    auto duration = duration_cast<microseconds>(stop - start);
-    cout << "Failo nuskaitymas uztruko " << duration.count() << " mikrosekundes," << endl;
-    double microseconds = duration.count();
-    double seconds = microseconds / 1000000;
-    cout << "kas yra " << fixed << setprecision(6) << seconds << " sekundes.";
+    SplitVector(student);
 }
 
 /* MANUAL INPUT MODE */
@@ -179,8 +174,8 @@ void OutputBy(const vector<Studentas>& student) {
     vector<Studentas> sortedStudent = student;
     int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
 
+    auto start = high_resolution_clock::now();
     if ( placeholder == 1 ) {
-    cout << "Pradetas rusiavimas" << endl;
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
         string vardasA = a.Vardas;
         string vardasB = b.Vardas;
@@ -199,7 +194,6 @@ void OutputBy(const vector<Studentas>& student) {
             return vardasA < vardasB;
         }
     });
-    cout << "Pabaigtas rusiavimas" << endl;
 
         int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
         if (n == 1){
@@ -223,11 +217,6 @@ void OutputBy(const vector<Studentas>& student) {
                 studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
                 FileOff << studentData.str() << endl;
             }
-            cout << "Baigtas isvedimas" << endl;
-                // Flush the output buffer to ensure immediate write to the file
-            FileOff.flush();
-            // Optionally, you can also close the file explicitly
-            FileOff.close();
         }
     }
 
@@ -335,6 +324,10 @@ void OutputBy(const vector<Studentas>& student) {
             }
         }
     }
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Writing finished! Student data writing took " << diff.count() << " seconds." << endl;
 }
 
 void filegeneration(){
@@ -343,6 +336,7 @@ void filegeneration(){
     int n = NumberVerification("Kiek studentu norime generuoti: ", 1);
     int m = 10; // Pazymiu skaicius (galima pakeisti i NumberVerification jeigu norime galeti pasirinkti paziumiu skaiciu)
 
+    auto start = high_resolution_clock::now();
     // File creation
     string fileName = to_string(n) + "_GeneratedStudents.txt";
     ofstream FileOff(fileName);
@@ -368,34 +362,16 @@ void filegeneration(){
         FileOff << studentData.str() << endl;
     }
     FileOff.close();
-    cout << "Generation finished" << endl;
 
-    // File reading
-    vector<Studentas> student;
-    ifstream FileIn(fileName);
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Generation finished! File generation took " << diff.count() << " seconds." << endl;
 
-    string line;
-    getline(FileIn, line);
+    readingmode(fileName);
+}
 
-    while (getline(FileIn, line)) {
-        Studentas duom;
-
-        stringstream get(line);
-
-        get >> duom.Vardas >> duom.Pavarde;
-        int grade;
-        // Nuskaitomi visi skaiciai iki eilutes galo
-        while (get >> grade) {
-            duom.namudarbas.push_back(grade);
-        }
-        // Priskiriamas egzamino rezultatas yra paskutinis is nuskaitytu skaicius
-        duom.egzaminorez = duom.namudarbas.back();
-        duom.namudarbas.pop_back();
-
-        student.push_back(duom);
-    }
-    FileIn.close();
-    cout << "Reading finished" << endl;
+void SplitVector(const vector<Studentas>& student){
+    auto start = high_resolution_clock::now();
 
     vector<Studentas> nuskriaustukai;
     vector<Studentas> kietiakiai;
@@ -407,9 +383,14 @@ void filegeneration(){
             kietiakiai.push_back(duom);
         }
     }
-    OutputBy(kietiakiai);
-}
 
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Sorting finished! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
+
+    OutputBy(kietiakiai);
+    OutputBy(nuskriaustukai);
+}
 // Apskaiciuojamas namu darbu rezultatu vidurkis
 double Vidurkis(const vector<int>& namudarbas) {
     double sum = 0;
