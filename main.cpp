@@ -63,7 +63,7 @@ void readingmode(const string& fileName){
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Reading finished! File reading took " << diff.count() << " seconds." << endl;
+    cout << "Failo nuskaitymas! File reading took " << diff.count() << " seconds." << endl;
 
     SplitVector(student);
 }
@@ -184,8 +184,8 @@ void OutputBy(const vector<Studentas>& student) {
 
     int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
 
-    auto start = high_resolution_clock::now();
     if ( placeholder == 1 ) {
+    auto start = high_resolution_clock::now();
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
         string vardasA = a.Vardas;
         string vardasB = b.Vardas;
@@ -204,6 +204,9 @@ void OutputBy(const vector<Studentas>& student) {
             return vardasA < vardasB;
         }
     });
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "studentu grupes rusiavimas didejimo tvarka! Took " << diff.count() << " seconds." << endl;
 
         int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
         if (n == 1){
@@ -337,10 +340,6 @@ void OutputBy(const vector<Studentas>& student) {
             FileOff.close();
         }
     }
-
-    auto stop = high_resolution_clock::now();
-    chrono::duration<double> diff = stop - start;
-    cout << "Writing finished! " + file + " Student data writing took " << diff.count() << " seconds." << endl;
 }
 
 void filegeneration(){
@@ -399,7 +398,7 @@ void SplitVector(const vector<Studentas>& student){
 
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Sorting finished! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
 
     OutputBy(kietiakiai);
     OutputBy(nuskriaustukai);
