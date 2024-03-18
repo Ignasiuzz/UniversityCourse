@@ -22,7 +22,7 @@ void readingmode(const string& fileName){
     list<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("100000_GeneratedStudents.txt");
+        inputFile.open("10000_GeneratedStudents.txt");
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -63,7 +63,7 @@ void readingmode(const string& fileName){
     // Stabdomas skaiciuojamas laikas
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Reading finished! File reading took " << diff.count() << " seconds." << endl;
+    cout << "Failo nuskaitymas! File reading took " << diff.count() << " seconds." << endl;
 
     SplitVector(student);
 }
@@ -170,7 +170,6 @@ void OutputBy(const list<Studentas>& student) {
     string file = "Studentukai";
 
     int sortingMethod = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
-
     switch (sortingMethod) {
         case 1:
             OutputByVardas(sortedStudent, file);
@@ -191,6 +190,7 @@ void OutputBy(const list<Studentas>& student) {
 }
 
 void OutputByVardas(list<Studentas>& sortedStudent, string& file) {
+    auto start = high_resolution_clock::now();
     sortedStudent.sort([](const Studentas& a, const Studentas& b) {
         string vardasA = a.Vardas;
         string vardasB = b.Vardas;
@@ -209,7 +209,9 @@ void OutputByVardas(list<Studentas>& sortedStudent, string& file) {
             return vardasA < vardasB;
         }
     });
-
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "studentu grupes rusiavimas didejimo tvarka! Took " << diff.count() << " seconds." << endl;
     int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
         if (n == 1) {
             cout << "-----------------------------------------------------------------" << endl;
@@ -378,7 +380,7 @@ void SplitVector(const list<Studentas>& student){
 
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Sorting finished! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
 
     OutputBy(kietiakiai);
     OutputBy(nuskriaustukai);
