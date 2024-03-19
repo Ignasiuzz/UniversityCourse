@@ -12,10 +12,17 @@ Ignas V
 
 # Main files
 MainVector.cpp - Programa su Vector konteineriais  
+VectorHeader.h - aprasytos funkcijos ir strukturos  
+VectorIncludes.h - surasyti visi #include  
+
 MainList.cpp - Programa su List konteineriais   
+ListHeader.h - aprasytos funkcijos ir strukturos  
+ListIncludes.h - surasyti visi #include  
+
 MainDeque.cpp - Programa su Deque konteineriais   
-header.h - aprasytos funkcijos ir strukturos  
-includes.h - surasyti visi #include  
+DequeHeader.h - aprasytos funkcijos ir strukturos  
+DequeIncludes.h - surasyti visi #include  
+
 RandInt.hpp - skirta generuoti skaiciams  
 
 # Extra files
@@ -23,7 +30,6 @@ RandInt.hpp - skirta generuoti skaiciams
 10000_GeneratedStudents.txt  
 100000_GeneratedStudents.txt  
 1000000_GeneratedStudents.txt  
-10000000_GeneratedStudents.txt  
 # Speed analysis
 ## 1 tyrimas. Failu generavimas [v0.4]:
 
