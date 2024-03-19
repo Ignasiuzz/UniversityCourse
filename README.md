@@ -57,84 +57,94 @@ Studentų rūšiavimas į dvi grupes uztruko 12.357 sekundes.
 Kietiaku isvedimas i faila uztruko 228.836 sekundes.  
 Nuskriaustuku isvedimas i faila uztruko 168.7612 sekundes.  
 Visos programos veikimo laikas 493.9393 sekundes.
-## Speed Analysis with Vector container
+## Speed Analysis with Vector container (average)
 ### 1000 studentu
 
-Failo nuskaitymas! File reading took 0.0064582 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0015264 seconds.  
-**1 strategija:**  
-studentu grupes rusiavimas didejimo tvarka! Took 0.0015221 seconds.  
-studentu grupes rusiavimas didejimo tvarka! Took 0.0009114 seconds.  
-**2 strategija:** 
+Failo nuskaitymas! File reading took 0.0030433 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0003453 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0012568 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0007193 seconds.  
 ### 10000 studentu
 
-Failo nuskaitymas! File reading took 0.308146 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.167959 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 0.0170269 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 0.010611 seconds.  
-**2 strategija:**  
+Failo nuskaitymas! File reading took 0.0202934 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.003805 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0192138 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0110012 seconds.   
 ### 100000 studentu
 
-Failo nuskaitymas! File reading took 0.971385 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 1.10725 seconds.  
-**1 strategija:**  
-studentu grupes rusiavimas didejimo tvarka! Took 0.224068 seconds.  
-studentu grupes rusiavimas didejimo tvarka! Took 0.158108 seconds.  
-**2 strategija:**  
+Failo nuskaitymas! File reading took 0.191158 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0308409 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.215776 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.154521 seconds.    
 ### 1000000 studentu
 
-Failo nuskaitymas! File reading took 5.20445 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 1.70148 seconds.  
-**1 strategija:**  
-studentu grupes rusiavimas didejimo tvarka! Took 2.64111 seconds.  
-studentu grupes rusiavimas didejimo tvarka! Took 1.89618 seconds.  
-**1 strategija:**  
+Failo nuskaitymas! File reading took 1.92851 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.304202 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 2.63818 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 1.91011 seconds.    
 
 ### 10000000 studentu
-Failo nuskaitymas! File reading took 45.2525 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 7.14077 seconds.  
-**1 strategija:**  
-studentu grupes rusiavimas didejimo tvarka! Took 34.6841 seconds.  
-studentu grupes rusiavimas didejimo tvarka! Took 34.6841 seconds.  
-**2 strategija:**  
-## Speed Analysis with List container
+Failo nuskaitymas! File reading took 18.5539 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 2.96467 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 33.9316 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 22.6811 seconds.    
+## Speed Analysis with List container (average)
 ### 1000 studentu
   
-Failo nuskaitymas! File reading took 0.0105633 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0048674 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 0.0005831 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 0.0003671 seconds.  
-**2 strategija:**
+Failo nuskaitymas! File reading took 0.0029562 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0013328 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0006167 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0004432 seconds.  
 ### 10000 studentu
 
-Failo nuskaitymas! File reading took 0.108236 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0484067 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 0.0075475 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 0.0049174 seconds.  
-**2 strategija:**
+Failo nuskaitymas! File reading took 0.0257348 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0113529 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0081756 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0052752 seconds.  
 ### 100000 studentu
 
-Failo nuskaitymas! File reading took 1.03398 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.476621 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 0.0983661 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 0.0693338 seconds.  
-**2 strategija:**
+Failo nuskaitymas! File reading took 0.257668 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.121524 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0924775 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0684087 seconds.  
 ### 1000000 studentu
 
-Failo nuskaitymas! File reading took 10.8194 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 4.85575 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 1.31633 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 0.860636 seconds.  
-**2 strategija:**  
+Failo nuskaitymas! File reading took 2.60287 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 1.28934 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 1.22637 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.827219 seconds.    
 ### 10000000 studentu
-Failo nuskaitymas! File reading took 165.273 seconds.  
-Studentu skirstymas i dvi grupes! Student sorting to two vectors took 52.4094 seconds.  
-**1 strategija:**  
-1 studentu grupes rusiavimas didejimo tvarka! Took 15.0429 seconds.  
-2 studentu grupes rusiavimas didejimo tvarka! Took 13.1367 seconds.  
-**2 strategija:**  
+Failo nuskaitymas! File reading took 26.9321 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 13.3564 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 14.6688 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 9.74194 seconds.   
+## Speed Analysis with Deque container (average)
+### 1000 studentu
+  
+Failo nuskaitymas! File reading took 0.0020896 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0008367 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0015102 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0008823 seconds.    
+### 10000 studentu
+
+Failo nuskaitymas! File reading took 0.0185253 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0088459 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.0201471 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.0134492 seconds.    
+### 100000 studentu
+
+Failo nuskaitymas! File reading took 0.183295 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 0.0920748 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 0.256233 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 0.184438 seconds.    
+### 1000000 studentu
+
+Failo nuskaitymas! File reading took 1.80942 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 1.14468 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 3.04318 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 2.21802 seconds.      
+### 10000000 studentu
+Failo nuskaitymas! File reading took 18.2086 seconds.  
+Studentu skirstymas i dvi grupes! Student sorting to two vectors took 8.94321 seconds.  
+1 studentu grupes rusiavimas didejimo tvarka! Took 40.0676 seconds.  
+2 studentu grupes rusiavimas didejimo tvarka! Took 27.8034 seconds.  
