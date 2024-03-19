@@ -9,12 +9,12 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("studentai10000.txt");
+        readingmode("1000000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
     }
-    return 0;
+    system("pause");
 }
 
 /* READING FROM FILE MODE */
@@ -22,7 +22,7 @@ void readingmode(const string& fileName){
     list<Studentas> student;
     ifstream inputFile;
     try {
-        inputFile.open("10000_GeneratedStudents.txt");
+        inputFile.open(fileName);
 
         if (!inputFile) {
             throw invalid_argument("Neimanoma atidaryti failo.");
@@ -65,7 +65,16 @@ void readingmode(const string& fileName){
     chrono::duration<double> diff = stop - start;
     cout << "Failo nuskaitymas! File reading took " << diff.count() << " seconds." << endl;
 
-    SplitVector(student);
+    int int_temp = NumberVerification("Studentu dalijimas i dvi grupes\n1 Strategija [1]\n2 Strategija [2]\n3 Strategija [3]\nIvestis: ", 1, 3);
+    if (int_temp == 1){
+        SplitList(student);
+    }
+    else if (int_temp == 2){
+        SplitList2(student);
+    }
+    else if (int_temp == 3){
+        SplitList3(student);
+    }
 }
 
 /* MANUAL INPUT MODE */
@@ -169,7 +178,8 @@ void OutputBy(const list<Studentas>& student) {
     list<Studentas> sortedStudent = student;
     string file = "Studentukai";
 
-    int sortingMethod = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
+    //int sortingMethod = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
+    int sortingMethod = 1;
     switch (sortingMethod) {
         case 1:
             OutputByVardas(sortedStudent, file);
@@ -364,7 +374,7 @@ void filegeneration(){
     cout << "Generation finished! File generation took " << diff.count() << " seconds." << endl;
 }
 
-void SplitVector(const list<Studentas>& student){
+void SplitList(const list<Studentas>& student){
     auto start = high_resolution_clock::now();
 
     list<Studentas> nuskriaustukai;
@@ -383,6 +393,48 @@ void SplitVector(const list<Studentas>& student){
     cout << "Studentu skirstymas i dvi grupes! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
 
     OutputBy(kietiakiai);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitList2(list<Studentas>& students) {
+    auto start = high_resolution_clock::now();
+
+    list<Studentas> nuskriaustukai;
+
+    auto it = students.begin();
+    while (it != students.end()) {
+        if (GalutinisVid(*it) < 5) {
+            nuskriaustukai.splice(nuskriaustukai.end(), students, it++);
+        } else {
+            ++it;
+        }
+    }
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(students);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitList3(list<Studentas>& students) {
+    auto start = high_resolution_clock::now();
+
+    list<Studentas> nuskriaustukai;
+
+    auto partition_point = partition(students.begin(), students.end(), [](const Studentas& student) {
+        return GalutinisVid(student) < 5;
+    });
+
+    // Move students with GalutinisVid < 5 to nuskriaustukai
+    nuskriaustukai.splice(nuskriaustukai.end(), students, students.begin(), partition_point);
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(students);
     OutputBy(nuskriaustukai);
 }
 // Apskaiciuojamas namu darbu rezultatu vidurkis
