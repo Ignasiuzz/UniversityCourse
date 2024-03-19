@@ -1,8 +1,19 @@
 # UniversityCourse
-Objektinis programavimas
+Objektinis programavimas  
+Pirmoji Užduotis  
+Ignas V
+# Releases
+**v.pradinė** - pati paprasčiausia programa, kuri gali skaičiuoti galutinį pažymį naudojant paprastą vidurkį arba medianą.  
+**V0.1** - šioje versijoje yra du failai main.cpp ir vektoriai.cpp. Pirmas failas main.cpp veikia tik su C masyvais, antrasis vektoriai.cpp veikia tik su vector masyvais.  
+**v0.2** - pridėta funkcija, kad duomenis būtų galima ne tik įvesti, bet ir nuskaityti iš failo.  
+**V0.3** - atliktas refactoringas, pridėtas klaidų gaudymas.  
+**v0.4** - pridėta galimybė generuoti studentus bei juos atskirti į dvi grupes.
+**v1.0** - Finalinė programa. Programa realizuota su std::vector, std::list, std::deque. Testuotos trys studentų dalijimo į dvi grupes strategijos. Aprašyta programa.
 
 # Main files
-main.cpp - pagrindinis failas  
+MainVector.cpp - Programa su Vector konteineriais  
+MainList.cpp - Programa su List konteineriais   
+MainDeque.cpp - Programa su Deque konteineriais   
 header.h - aprasytos funkcijos ir strukturos  
 includes.h - surasyti visi #include  
 RandInt.hpp - skirta generuoti skaiciams  
@@ -154,6 +165,8 @@ Failo nuskaitymas! File reading took 18.2086 seconds.
 Studentu skirstymas i dvi grupes! Student sorting to two groups took 8.94321 seconds.  
 1 studentu grupes rusiavimas didejimo tvarka! Took 40.0676 seconds.  
 2 studentu grupes rusiavimas didejimo tvarka! Took 27.8034 seconds.  
+## Konteineriu testavimo apibendrinimas
+Atlikus konteineriu testasvima galime pastebėti, kad Vector ir Deque konteineriai yra labai panašūs savo veikimo greičiu bei savybėmis. List konteinerio informacijos nuskaitymas užtrunka ilgiau tačiau studentų dalijimas į dvi grupes bei rušiavimas yra daug greitesnis.
 ## Strategijų 1-3 analizė (average) [v1.0]
 1 strategija: Bendro studentai konteinerio skaidymas į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų".  
 2 strategija: Bendro studentų konteinerioskaidymas panaudojant tik vieną naują konteinerį: "vargšiukai". Tokiu būdu, jei studentas yra vargšiukas, jį turime įkelti į naująjį "vargšiukų" konteinerį ir ištrinti iš bendro studentai konteinerio. Po šio žingsnio studentai konteineryje liks vien tik kietiakai.  
@@ -164,52 +177,52 @@ Vector
 2 Student sorting to two groups took 0.0141142 seconds.  
 3 Student sorting to two groups took 0.00033 seconds.  
 List  
-Student sorting to two vectors took 0.0013872 seconds.  
-Student sorting to two groups took 0.0003498 seconds.   
-Student sorting to two groups took 0.0004426 seconds.  
+1 Student sorting to two vectors took 0.0013872 seconds.  
+2 Student sorting to two groups took 0.0003498 seconds.   
+3 Student sorting to two groups took 0.0004426 seconds.  
 Deque  
-Student sorting to two groups took 0.000958 seconds.  
-Student sorting to two groups took 0.0080031 seconds.  
-Student sorting to two groups took 0.0009854 seconds.
+1 Student sorting to two groups took 0.000958 seconds.  
+2 Student sorting to two groups took 0.0080031 seconds.  
+3 Student sorting to two groups took 0.0009854 seconds.
 ### 10000 studentu
 Vector    
 1 Student sorting to two groups took 0.0031811 seconds.  
 2 Student sorting to two groups took 1.37601 seconds.  
 3 Student sorting to two groups took 0.0039675 seconds.  
 List  
-Student sorting to two vectors took 0.0117402 seconds.  
-Student sorting to two groups took 0.0028993 seconds.  
-Student sorting to two groups took 0.0037563 seconds.  
+1 Student sorting to two vectors took 0.0117402 seconds.  
+2 Student sorting to two groups took 0.0028993 seconds.  
+3 Student sorting to two groups took 0.0037563 seconds.  
 Deque  
-Student sorting to two groups took 0.0107672 seconds.  
-Student sorting to two groups took 0.715232 seconds.  
-Student sorting to two groups took 0.0079771 seconds.
+1 Student sorting to two groups took 0.0107672 seconds.  
+2 Student sorting to two groups took 0.715232 seconds.  
+3 Student sorting to two groups took 0.0079771 seconds.
 ### 100000 studentu
 Vector    
 1 Student sorting to two groups took 0.0285277 seconds.  
 2 Student sorting to two groups did not finish [DNF]  
 3 Student sorting to two groups took 0.024283 seconds.  
 List  
-Student sorting to two vectors took 0.116075 seconds.  
-Student sorting to two groups took 0.0293661 seconds.  
-Student sorting to two groups took 0.033782 seconds.  
+1 Student sorting to two vectors took 0.116075 seconds.  
+2 Student sorting to two groups took 0.0293661 seconds.  
+3 Student sorting to two groups took 0.033782 seconds.  
 Deque  
-Student sorting to two groups took 0.0899883 seconds.  
+1 Student sorting to two groups took 0.0899883 seconds.  
 2 Student sorting to two groups did not finish [DNF]  
-Student sorting to two groups took 0.0820453 seconds.  
+3 Student sorting to two groups took 0.0820453 seconds.  
 ### 1000000 studentu
 Vector  
 1 Student sorting to two groups took 0.281021 seconds.  
 2 Student sorting to two groups did not finish [DNF]  
 3 Student sorting to two groups took 0.246047 seconds.  
 List  
-Student sorting to two vectors took 1.16253 seconds.  
-Student sorting to two groups took 0.278465 seconds.  
-Student sorting to two groups took 0.333081 seconds.  
+1 Student sorting to two vectors took 1.16253 seconds.  
+2 Student sorting to two groups took 0.278465 seconds.  
+3 Student sorting to two groups took 0.333081 seconds.  
 Deque  
-Student sorting to two groups took 0.886573 seconds.  
+1 Student sorting to two groups took 0.886573 seconds.  
 2 Student sorting to two groups did not finish [DNF]  
-Student sorting to two groups took 0.869048 seconds.  
+3 Student sorting to two groups took 0.869048 seconds.  
 
 ### 10000000 studentu
 Vector  
@@ -217,10 +230,12 @@ Vector
 2 Student sorting to two groups did not finish [DNF]   
 2 Student sorting to two groups took 2.26505 seconds.  
 List  
-Student sorting to two vectors took 12.7083 seconds.  
-Student sorting to two groups took 2.48508 seconds.  
-Student sorting to two groups took 3.28574 seconds.  
+1 Student sorting to two vectors took 12.7083 seconds.  
+2 Student sorting to two groups took 2.48508 seconds.  
+3 Student sorting to two groups took 3.28574 seconds.  
 Deque  
-Student sorting to two groups took 11.8126 seconds.  
+1 Student sorting to two groups took 11.8126 seconds.  
 2 Student sorting to two groups did not finish [DNF]  
-Student sorting to two groups took 9.99469 seconds.  
+3 Student sorting to two groups took 9.99469 seconds.  
+## Dalijimo strategijų testavimo apibendrinimas
+Galime pastebėti, kad 2 dalijimo strategija veikė labai lėtai su Vector ir Deque konteineriais, tačiau programoje su List konteineriu ši strategija buvo optimaliausia ir greičiausia.
