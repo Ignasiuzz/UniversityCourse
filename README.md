@@ -88,7 +88,7 @@ Failo nuskaitymas! File reading took 18.5539 seconds.
 Studentu skirstymas i dvi grupes! Student sorting to two vectors took 2.96467 seconds.  
 1 studentu grupes rusiavimas didejimo tvarka! Took 33.9316 seconds.  
 2 studentu grupes rusiavimas didejimo tvarka! Took 22.6811 seconds.    
-## Speed Analysis with List container
+## Speed Analysis with List container (average)
 ### 1000 studentu
   
 Failo nuskaitymas! File reading took 0.0029562 seconds.  
@@ -118,7 +118,7 @@ Failo nuskaitymas! File reading took 26.9321 seconds.
 Studentu skirstymas i dvi grupes! Student sorting to two vectors took 13.3564 seconds.  
 1 studentu grupes rusiavimas didejimo tvarka! Took 14.6688 seconds.  
 2 studentu grupes rusiavimas didejimo tvarka! Took 9.74194 seconds.   
-## Speed Analysis with Deque container
+## Speed Analysis with Deque container (average)
 ### 1000 studentu
   
 Failo nuskaitymas! File reading took 0.0020896 seconds.  
