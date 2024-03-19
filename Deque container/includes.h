@@ -12,8 +12,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <random>
-#include <list>
-#include <iterator>
+#include <deque>
 
 using namespace std;
 using namespace std::chrono;

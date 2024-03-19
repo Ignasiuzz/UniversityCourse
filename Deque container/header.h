@@ -3,26 +3,26 @@
 
 struct Studentas {
     string Vardas, Pavarde;
-    list<int> namudarbas;
+    deque<int> namudarbas;
     int egzaminorez;
 };
 
 void input1(Studentas& duom);
 void input2(Studentas& duom);
 void input3(Studentas& duom, int n);
-double Vidurkis(const list<int>& namudarbas);
-double Mediana(const list<int>& namudarbas);
+double Vidurkis(const deque<int>& namudarbas);
+double Mediana(const deque<int>& namudarbas);
 double GalutinisVid(const Studentas& duom);
 double GalutinisMed(const Studentas& duom);
-void OutputBy(const list<Studentas>& student);
-void OutputByVardas(list<Studentas>& sortedStudent, string& file);
-void OutputByPavarde(list<Studentas>& sortedStudent, string& file);
-void OutputByVidurkis(list<Studentas>& sortedStudent, string& file);
-void OutputByMediana(list<Studentas>& sortedStudent, string& file);
+void OutputBy(const deque<Studentas>& student);
+void OutputByVardas(deque<Studentas>& sortedStudent, string& file);
+void OutputByPavarde(deque<Studentas>& sortedStudent, string& file);
+void OutputByVidurkis(deque<Studentas>& sortedStudent, string& file);
+void OutputByMediana(deque<Studentas>& sortedStudent, string& file);
 void manualmode();
 void readingmode(const string& fileName);
 void filegeneration();
-void SplitVector(const list<Studentas>& student);
+void SplitVector(const deque<Studentas>& student);
 int NumberVerification(const string& prompt, int minValue, int maxValue);
 int NumberVerification(const string& prompt, int minValue);
 char YesNoVerification(const string& prompt);
