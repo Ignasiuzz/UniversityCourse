@@ -9,12 +9,12 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("studentai10000.txt");
+        readingmode("1000000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
     }
-    return 0;
+    system ("pause");
 }
 
 /* READING FROM FILE MODE */
@@ -65,7 +65,16 @@ void readingmode(const string& fileName){
     chrono::duration<double> diff = stop - start;
     cout << "Failo nuskaitymas! File reading took " << diff.count() << " seconds." << endl;
 
-    SplitVector(student);
+    int int_temp = NumberVerification("Studentu dalijimas i dvi grupes\n1 Strategija [1]\n2 Strategija [2]\n3 Strategija [3]\nIvestis: ", 1, 3);
+    if (int_temp == 1){
+        SplitVector(student);
+    }
+    else if (int_temp == 2){
+        SplitVector2(student);
+    }
+    else if (int_temp == 3){
+        SplitVector3(student);
+    }
 }
 
 /* MANUAL INPUT MODE */
@@ -182,8 +191,8 @@ void OutputBy(const vector<Studentas>& student) {
         file = "Nuskriaustukai";
     }
 
-    int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
-
+    //int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
+    int placeholder = 1;
     if ( placeholder == 1 ) {
     auto start = high_resolution_clock::now();
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
@@ -208,29 +217,29 @@ void OutputBy(const vector<Studentas>& student) {
     chrono::duration<double> diff = stop - start;
     cout << "studentu grupes rusiavimas didejimo tvarka! Took " << diff.count() << " seconds." << endl;
 
-        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
-        if (n == 1){
-            cout << "-----------------------------------------------------------------" << endl;
-            cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-            cout << "-----------------------------------------------------------------" << endl;
-                for (const auto& duom : sortedStudent) {
-                    cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
-                }
-            cout << "-----------------------------------------------------------------" << endl;
-        }
-        else if (n == 2) {
-            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
-            ofstream FileOff(fileName);
-            FileOff << "-----------------------------------------------------------------" << endl;
-            FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-            FileOff << "-----------------------------------------------------------------" << endl;
-            for (const auto& duom : sortedStudent) {
-                stringstream studentData;
-                studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
-                FileOff << studentData.str() << endl;
-            }
-            FileOff.close();
-        }
+        // int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        // if (n == 1){
+        //     cout << "-----------------------------------------------------------------" << endl;
+        //     cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+        //     cout << "-----------------------------------------------------------------" << endl;
+        //         for (const auto& duom : sortedStudent) {
+        //             cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+        //         }
+        //     cout << "-----------------------------------------------------------------" << endl;
+        // }
+        // else if (n == 2) {
+        //     string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
+        //     ofstream FileOff(fileName);
+        //     FileOff << "-----------------------------------------------------------------" << endl;
+        //     FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+        //     FileOff << "-----------------------------------------------------------------" << endl;
+        //     for (const auto& duom : sortedStudent) {
+        //         stringstream studentData;
+        //         studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
+        //         FileOff << studentData.str() << endl;
+        //     }
+        //     FileOff.close();
+        // }
     }
 
     else if ( placeholder == 2 ){
@@ -398,9 +407,59 @@ void SplitVector(const vector<Studentas>& student){
 
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Studentu skirstymas i dvi grupes! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
 
     OutputBy(kietiakiai);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitVector2(vector<Studentas>& student) {
+    auto start = high_resolution_clock::now();
+
+    vector<Studentas> nuskriaustukai;
+
+    size_t i = 0;
+    while (i < student.size()) {
+        if (GalutinisVid(student[i]) < 5) {
+            nuskriaustukai.push_back(move(student[i]));
+            student.erase(student.begin() + i);
+        } else {
+            ++i;
+        }
+    }
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(student);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitVector3(vector<Studentas>& student) {
+    auto start = high_resolution_clock::now();
+
+    vector<Studentas> nuskriaustukai;
+
+    auto partition_point = partition(student.begin(), student.end(), [](const Studentas& student) {
+        return GalutinisVid(student) < 5;
+    });
+
+    // Move students with GalutinisVid < 5 to nuskriaustukai and erase them from students
+    auto remove_point = remove_if(student.begin(), partition_point, [](const Studentas& student) {
+        return GalutinisVid(student) < 5;
+    });
+
+    // Move removed students to nuskriaustukai
+    move(remove_point, partition_point, back_inserter(nuskriaustukai));
+
+    student.erase(remove_point, partition_point);
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(student);
     OutputBy(nuskriaustukai);
 }
 // Apskaiciuojamas namu darbu rezultatu vidurkis
