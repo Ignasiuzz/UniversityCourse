@@ -1,5 +1,5 @@
-#include "includes.h"
-#include "header.h"
+#include "DequeIncludes.h"
+#include "DequeHeader.h"
 
 int main() {
     cout << "---------------------------------------- " << endl;
@@ -9,7 +9,7 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("1000000_GeneratedStudents.txt");
+        readingmode("100000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
@@ -191,8 +191,7 @@ void OutputBy(const deque<Studentas>& student) {
         file = "Nuskriaustukai";
     }
 
-    // int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
-    int placeholder = 1;
+    int placeholder = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
     if ( placeholder == 1 ) {
     auto start = high_resolution_clock::now();
     sort(sortedStudent.begin(), sortedStudent.end(), [](const Studentas& a, const Studentas& b) {
@@ -217,29 +216,29 @@ void OutputBy(const deque<Studentas>& student) {
     chrono::duration<double> diff = stop - start;
     cout << "studentu grupes rusiavimas didejimo tvarka! Took " << diff.count() << " seconds." << endl;
 
-        // int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
-        // if (n == 1){
-        //     cout << "-----------------------------------------------------------------" << endl;
-        //     cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-        //     cout << "-----------------------------------------------------------------" << endl;
-        //         for (const auto& duom : sortedStudent) {
-        //             cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
-        //         }
-        //     cout << "-----------------------------------------------------------------" << endl;
-        // }
-        // else if (n == 2) {
-        //     string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
-        //     ofstream FileOff(fileName);
-        //     FileOff << "-----------------------------------------------------------------" << endl;
-        //     FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
-        //     FileOff << "-----------------------------------------------------------------" << endl;
-        //     for (const auto& duom : sortedStudent) {
-        //         stringstream studentData;
-        //         studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
-        //         FileOff << studentData.str() << endl;
-        //     }
-        //     FileOff.close();
-        // }
+        int n = NumberVerification("Isvesti duomenis i konsole [1]\nIsvesti duomenis i faila   [2]\nInput: ", 1, 2);
+        if (n == 1){
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            cout << "-----------------------------------------------------------------" << endl;
+                for (const auto& duom : sortedStudent) {
+                    cout << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom) << endl;
+                }
+            cout << "-----------------------------------------------------------------" << endl;
+        }
+        else if (n == 2) {
+            string fileName = to_string(sortedStudent.size()) + "_" + file + "_Studentai.txt";
+            ofstream FileOff(fileName);
+            FileOff << "-----------------------------------------------------------------" << endl;
+            FileOff << "Vardas         Pavarde        Galutinis (Vid.) / Galutinis (Med.)" << endl;
+            FileOff << "-----------------------------------------------------------------" << endl;
+            for (const auto& duom : sortedStudent) {
+                stringstream studentData;
+                studentData << left << setw(15) << duom.Vardas << setw(15) << duom.Pavarde << setw(19) << fixed << setprecision(2) << GalutinisVid(duom) << fixed << setprecision(2) << GalutinisMed(duom);
+                FileOff << studentData.str() << endl;
+            }
+            FileOff.close();
+        }
     }
 
     else if ( placeholder == 2 ){
