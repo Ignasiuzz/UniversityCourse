@@ -9,7 +9,7 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("10000000_GeneratedStudents.txt");
+        readingmode("1000000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
@@ -65,7 +65,16 @@ void readingmode(const string& fileName){
     chrono::duration<double> diff = stop - start;
     cout << "Failo nuskaitymas! File reading took " << diff.count() << " seconds." << endl;
 
-    SplitVector(student);
+    int int_temp = NumberVerification("Studentu dalijimas i dvi grupes\n1 Strategija [1]\n2 Strategija [2]\n3 Strategija [3]\nIvestis: ", 1, 3);
+    if (int_temp == 1){
+        SplitDeque(student);
+    }
+    else if (int_temp == 2){
+        SplitDeque2(student);
+    }
+    else if (int_temp == 3){
+        SplitDeque3(student);
+    }
 }
 
 /* MANUAL INPUT MODE */
@@ -382,7 +391,7 @@ void filegeneration(){
     readingmode(fileName);
 }
 
-void SplitVector(const deque<Studentas>& student){
+void SplitDeque(const deque<Studentas>& student){
     auto start = high_resolution_clock::now();
 
     deque<Studentas> nuskriaustukai;
@@ -398,9 +407,59 @@ void SplitVector(const deque<Studentas>& student){
 
     auto stop = high_resolution_clock::now();
     chrono::duration<double> diff = stop - start;
-    cout << "Studentu skirstymas i dvi grupes! Student sorting to two vectors took " << diff.count() << " seconds." << endl;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
 
     OutputBy(kietiakiai);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitDeque2(deque<Studentas>& student) {
+    auto start = high_resolution_clock::now();
+
+    deque<Studentas> nuskriaustukai;
+
+    auto it = student.begin();
+    while (it != student.end()) {
+        if (GalutinisVid(*it) < 5) {
+            nuskriaustukai.push_back(*it);
+            it = student.erase(it);
+        } else {
+            ++it;
+        }
+    }
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(student);
+    OutputBy(nuskriaustukai);
+}
+
+void SplitDeque3(deque<Studentas>& student) {
+    auto start = high_resolution_clock::now();
+
+    deque<Studentas> nuskriaustukai;
+
+    auto partition_point = partition(student.begin(), student.end(), [](const Studentas& student) {
+        return GalutinisVid(student) < 5;
+    });
+
+    // Move students with GalutinisVid < 5 to nuskriaustukai and erase them from students
+    auto remove_point = remove_if(student.begin(), partition_point, [](const Studentas& student) {
+        return GalutinisVid(student) < 5;
+    });
+
+    // Move removed students to nuskriaustukai
+    move(remove_point, partition_point, back_inserter(nuskriaustukai));
+
+    student.erase(remove_point, partition_point);
+
+    auto stop = high_resolution_clock::now();
+    chrono::duration<double> diff = stop - start;
+    cout << "Studentu skirstymas i dvi grupes! Student sorting to two groups took " << diff.count() << " seconds." << endl;
+
+    OutputBy(student);
     OutputBy(nuskriaustukai);
 }
 // Apskaiciuojamas namu darbu rezultatu vidurkis
