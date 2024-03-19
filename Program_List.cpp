@@ -1,5 +1,5 @@
-#include "includes.h"
-#include "header.h"
+#include "ListIncludes.h"
+#include "ListHeader.h"
 
 int main() {
     cout << "---------------------------------------- " << endl;
@@ -9,7 +9,7 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("1000000_GeneratedStudents.txt");
+        readingmode("10000000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
