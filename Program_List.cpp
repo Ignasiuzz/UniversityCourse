@@ -9,7 +9,7 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("10000000_GeneratedStudents.txt");
+        readingmode("100000_GeneratedStudents.txt");
     }
     else if (mode == 3){
         filegeneration();
@@ -178,8 +178,7 @@ void OutputBy(const list<Studentas>& student) {
     list<Studentas> sortedStudent = student;
     string file = "Studentukai";
 
-    //int sortingMethod = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
-    int sortingMethod = 1;
+    int sortingMethod = NumberVerification("Sort by:\nVardas   [1]\nPavarde  [2]\nVidurkis [3]\nMediana  [4]\nInput: ", 1, 4);
     switch (sortingMethod) {
         case 1:
             OutputByVardas(sortedStudent, file);
@@ -248,13 +247,13 @@ void OutputByPavarde(list<Studentas>& sortedStudent, string& file) {
     string PavardeB = b.Pavarde;
 
     // Check if the names follow the VardasX format
-    bool isPavardeAX = PavardeA.find("Vardas") != string::npos;
-    bool isPavardeBX = PavardeB.find("Vardas") != string::npos;
+    bool isPavardeAX = PavardeA.find("Pavarde") != string::npos;
+    bool isPavardeBX = PavardeB.find("Pavarde") != string::npos;
 
         if (isPavardeAX && isPavardeBX) {
             // Extract the numerical part (X) and compare
-            int numA = stoi(PavardeA.substr(6));
-            int numB = stoi(PavardeB.substr(6));
+            int numA = stoi(PavardeA.substr(7));
+            int numB = stoi(PavardeB.substr(7));
             return numA < numB;
         } else {
             // Compare regular names
