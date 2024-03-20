@@ -9,7 +9,13 @@ int main() {
         manualmode();
     } 
     else if (mode == 2) {
-        readingmode("100000_GeneratedStudents.txt");
+        cout << "---------------------------------------- " << endl;
+        cout<< "Galimi 1000, 10000, 100000, 1000000\nIveskite kiek studentu norime nuskaityti: ";
+        string n;
+        cin >> n;
+        string string_temp = n + "_GeneratedStudents.txt";
+        cout << "---------------------------------------- " << endl;
+        readingmode(string_temp);
     }
     else if (mode == 3){
         filegeneration();
