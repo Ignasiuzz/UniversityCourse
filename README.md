@@ -7,24 +7,28 @@ Ignas V
 **V0.1** - šioje versijoje yra du failai main.cpp ir vektoriai.cpp. Pirmas failas main.cpp veikia tik su C masyvais, antrasis vektoriai.cpp veikia tik su vector masyvais.  
 **v0.2** - pridėta funkcija, kad duomenis būtų galima ne tik įvesti, bet ir nuskaityti iš failo.  
 **V0.3** - atliktas refactoringas, pridėtas klaidų gaudymas.  
-**v0.4** - pridėta galimybė generuoti studentus bei juos atskirti į dvi grupes.
+**v0.4** - pridėta galimybė generuoti studentus bei juos atskirti į dvi grupes.  
 **v1.0** - Finalinė programa. Programa realizuota su std::vector, std::list, std::deque. Testuotos trys studentų dalijimo į dvi grupes strategijos. Aprašyta programa.
 
 # Main files
-MainVector.cpp - Programa su Vector konteineriais  
+Program_Vector.cpp - Programa su Vector konteineriais  
 VectorHeader.h - aprasytos funkcijos ir strukturos  
 VectorIncludes.h - surasyti visi #include  
 
-MainList.cpp - Programa su List konteineriais   
+Program_List.cpp - Programa su List konteineriais   
 ListHeader.h - aprasytos funkcijos ir strukturos  
 ListIncludes.h - surasyti visi #include  
 
-MainDeque.cpp - Programa su Deque konteineriais   
+Program_Deque.cpp - Programa su Deque konteineriais   
 DequeHeader.h - aprasytos funkcijos ir strukturos  
 DequeIncludes.h - surasyti visi #include  
 
 RandInt.hpp - skirta generuoti skaiciams  
-
+# Naudojimo instrukcija  
+1. Atsisiusti Source code(zip)
+2. Kompiliuoti pasirinktą Program_Vector.cpp, Program_List.cpp, Program_Deque.cpp jūsų mėgiamu būdu.
+3. Spausti ant sugeneruoto pvz. Program_Vector.exe
+4. Naudotis programa
 # Extra files
 1000_GeneratedStudents.txt  
 10000_GeneratedStudents.txt  
