@@ -248,13 +248,13 @@ void OutputBy(const deque<Studentas>& student) {
         string PavardeB = b.Pavarde;
 
         // Check if the names follow the VardasX format
-        bool isPavardeAX = PavardeA.find("Vardas") != string::npos;
-        bool isPavardeBX = PavardeB.find("Vardas") != string::npos;
+        bool isPavardeAX = PavardeA.find("Pavarde") != string::npos;
+        bool isPavardeBX = PavardeB.find("Pavarde") != string::npos;
 
         if (isPavardeAX && isPavardeBX) {
             // Extract the numerical part (X) and compare
-            int numA = stoi(PavardeA.substr(6));
-            int numB = stoi(PavardeB.substr(6));
+            int numA = stoi(PavardeA.substr(7));
+            int numB = stoi(PavardeB.substr(7));
             return numA < numB;
         } else {
             // Compare regular names
